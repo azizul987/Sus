@@ -2,7 +2,7 @@ name: Update SUS Data
 
 on:
   schedule:
-    - cron: "*/20 * * * *" # tiap 20 menit
+    - cron: "*/20 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -15,7 +15,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # perlu full history untuk pull --rebase
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -26,20 +26,19 @@ jobs:
         run: |
           pip install pandas openpyxl requests
 
-      - name: Generate JSON files
+      - name: Generate data
         run: python generate_data.py
 
-      - name: Commit Data
+      - name: Commit output JSON
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # sinkron dulu dengan remote
           git pull --rebase origin main || true
 
           if [[ `git status --porcelain` ]]; then
             git add data.json nim_issues.json sus_scores.json
-            git commit -m "Update JSON data (auto)"
+            git commit -m "Auto update JSON"
             git push origin HEAD:main
           else
             echo "No changes"
