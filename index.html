@@ -144,7 +144,7 @@
       background: var(--bg-card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow: hidden; /* for border radius on table */
+      overflow: hidden;
       border: 1px solid var(--border);
       margin-top: 16px;
     }
@@ -171,7 +171,7 @@
     }
 
     td {
-      padding: 16px;
+      padding: 12px 16px;
       border-bottom: 1px solid #f3f4f6;
       color: #374151;
     }
@@ -251,6 +251,57 @@
       letter-spacing: 0.05em;
     }
 
+    /* SUS detail panel */
+    .sus-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .sus-detail-grid h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .mini-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .mini-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .mini-table td:first-child {
+      width: 40px;
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    .btn-link {
+      border: none;
+      background: none;
+      padding: 4px 0;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--primary);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .btn-link:hover {
+      color: var(--primary-hover);
+    }
+
     /* Responsive Table */
     .card {
       overflow-x: auto;
@@ -280,12 +331,22 @@
         <input id="search" class="search-input" placeholder="Cari nama / NIM / aplikasi..." />
 
         <select id="filter-app" class="select-input">
-          <option value="">Filter berdasarkan aplikasi...</option>
+          <option value="">Filter berdasarkan aplikasi (belum dinilai)...</option>
         </select>
 
         <label class="checkbox-label">
           <input type="checkbox" id="only-pending" />
           Hanya yang belum menilai semua
+        </label>
+
+        <!-- Filter ≥ 35 dan < 35 berdasarkan Jumlah Terisi (app_filled_count) -->
+        <label class="checkbox-label">
+          <input type="checkbox" id="only-35plus" />
+          ≥ 35 terisi
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="only-below35" />
+          &lt; 35 terisi
         </label>
       </div>
 
@@ -341,39 +402,27 @@
       <div class="card">
         <div class="sus-metrics" id="sus-metrics"></div>
 
+        <!-- Tabel ringkas, tanpa Q1–Q10 dan S1–S10 -->
         <table>
           <thead>
             <tr>
               <th>#</th>
               <th>Nama</th>
               <th>NIM</th>
-
-              <th colspan="10">Jawaban Q1–Q10</th>
-              <th colspan="10">Skor S1–S10</th>
-
               <th>Jumlah</th>
               <th>SUS</th>
-            </tr>
-
-            <tr>
-              <th></th><th></th><th></th>
-
-              <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th>
-              <th>Q6</th><th>Q7</th><th>Q8</th><th>Q9</th><th>Q10</th>
-
-              <th>S1</th><th>S2</th><th>S3</th><th>S4</th><th>S5</th>
-              <th>S6</th><th>S7</th><th>S8</th><th>S9</th><th>S10</th>
-
-              <th></th>
-              <th></th>
+              <th>Detail</th>
             </tr>
           </thead>
 
           <tbody id="sus-tbody">
-            <tr><td colspan="25">Pilih aplikasi.</td></tr>
+            <tr><td colspan="6">Pilih aplikasi.</td></tr>
           </tbody>
         </table>
       </div>
+
+      <!-- Panel detail satu responden (Q1–Q10 dan S1–S10) -->
+      <div id="sus-detail-panel" class="card hidden"></div>
     </div>
 
     <p style="font-size:11px;color:#666;margin-top:12px;">
@@ -423,6 +472,8 @@ function renderTable() {
   const search = document.getElementById("search").value.toLowerCase();
   const onlyPending = document.getElementById("only-pending").checked;
   const filterApp = document.getElementById("filter-app").value;
+  const only35plus = document.getElementById("only-35plus").checked;
+  const onlyBelow35 = document.getElementById("only-below35").checked;
 
   tbody.innerHTML = "";
 
@@ -435,7 +486,18 @@ function renderTable() {
 
     const matchApp = !filterApp || (d.not_filled || []).includes(filterApp);
 
-    return matchText && matchPending && matchApp;
+    // Filter berdasarkan Jumlah Terisi (app_filled_count)
+    let matchJumlah = true;
+    if (only35plus && !onlyBelow35) {
+      matchJumlah = d.app_filled_count >= 35;
+    } else if (!only35plus && onlyBelow35) {
+      matchJumlah = d.app_filled_count < 35;
+    } else {
+      // kedua ceklis off atau dua-duanya on -> tidak filter khusus
+      matchJumlah = true;
+    }
+
+    return matchText && matchPending && matchApp && matchJumlah;
   });
 
   if (filtered.length === 0) {
@@ -487,24 +549,69 @@ function renderNimIssues() {
 }
 
 /* ==========================================
-      DETAIL SUS (TABEL BESAR)
+      DETAIL SUS (TABEL RINGKAS)
 ========================================== */
+function showSusResponseDetail(entry, idx) {
+  const panel = document.getElementById("sus-detail-panel");
+  const r = entry.responses[idx];
+  if (!r) {
+    panel.classList.add("hidden");
+    panel.innerHTML = "";
+    return;
+  }
+
+  const qRows = [];
+  const sRows = [];
+  for (let i = 1; i <= 10; i++) {
+    qRows.push(`<tr><td>Q${i}</td><td>${r["q"+i] ?? "-"}</td></tr>`);
+    sRows.push(`<tr><td>S${i}</td><td>${r["s"+i] ?? "-"}</td></tr>`);
+  }
+
+  panel.innerHTML = `
+    <div style="padding:16px;">
+      <div style="margin-bottom:12px;">
+        <strong>Responden:</strong> ${r.respondent_name} (${r.respondent_nim || "-"})<br>
+        <strong>Jumlah:</strong> ${r.jumlah_raw ?? "-"} • 
+        <strong>SUS:</strong> ${r.sus?.toFixed(1) ?? "-"}
+      </div>
+      <div class="sus-detail-grid">
+        <div>
+          <h3>Jawaban Q1–Q10</h3>
+          <table class="mini-table">
+            <tbody>${qRows.join("")}</tbody>
+          </table>
+        </div>
+        <div>
+          <h3>Skor S1–S10</h3>
+          <table class="mini-table">
+            <tbody>${sRows.join("")}</tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+  panel.classList.remove("hidden");
+}
+
 function renderSusDetail() {
   const appName = document.getElementById("sus-app-select").value;
   const tbody = document.getElementById("sus-tbody");
   const metrics = document.getElementById("sus-metrics");
+  const panel = document.getElementById("sus-detail-panel");
 
   tbody.innerHTML = "";
   metrics.innerHTML = "";
+  panel.classList.add("hidden");
+  panel.innerHTML = "";
 
   if (!appName) {
-    tbody.innerHTML = `<tr><td colspan="25">Pilih aplikasi.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6">Pilih aplikasi.</td></tr>`;
     return;
   }
 
   const entry = susData.find(x => x.app === appName);
   if (!entry) {
-    tbody.innerHTML = `<tr><td colspan="25">Data tidak ditemukan.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="6">Data tidak ditemukan.</td></tr>`;
     return;
   }
 
@@ -517,39 +624,23 @@ function renderSusDetail() {
 
   entry.responses.forEach((r,i) => {
     const tr = document.createElement("tr");
-
     tr.innerHTML = `
       <td>${i+1}</td>
       <td>${r.respondent_name}</td>
       <td>${r.respondent_nim}</td>
-
-      <td>${r.q1 ?? "-"}</td>
-      <td>${r.q2 ?? "-"}</td>
-      <td>${r.q3 ?? "-"}</td>
-      <td>${r.q4 ?? "-"}</td>
-      <td>${r.q5 ?? "-"}</td>
-      <td>${r.q6 ?? "-"}</td>
-      <td>${r.q7 ?? "-"}</td>
-      <td>${r.q8 ?? "-"}</td>
-      <td>${r.q9 ?? "-"}</td>
-      <td>${r.q10 ?? "-"}</td>
-
-      <td>${r.s1 ?? "-"}</td>
-      <td>${r.s2 ?? "-"}</td>
-      <td>${r.s3 ?? "-"}</td>
-      <td>${r.s4 ?? "-"}</td>
-      <td>${r.s5 ?? "-"}</td>
-      <td>${r.s6 ?? "-"}</td>
-      <td>${r.s7 ?? "-"}</td>
-      <td>${r.s8 ?? "-"}</td>
-      <td>${r.s9 ?? "-"}</td>
-      <td>${r.s10 ?? "-"}</td>
-
       <td>${r.jumlah_raw ?? "-"}</td>
       <td>${r.sus?.toFixed(1) ?? "-"}</td>
+      <td><button class="btn-link" data-index="${i}">Lihat detail</button></td>
     `;
-
     tbody.appendChild(tr);
+  });
+
+  // Pasang event listener untuk tombol "Lihat detail"
+  tbody.querySelectorAll(".btn-link").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const idx = parseInt(e.currentTarget.getAttribute("data-index"), 10);
+      showSusResponseDetail(entry, idx);
+    });
   });
 }
 
@@ -573,6 +664,29 @@ function populateSusAppSelect() {
 }
 
 /* ==========================================
+      POPULATE FILTER-APP (belum dinilai)
+========================================== */
+function populateFilterApp() {
+  const sel = document.getElementById("filter-app");
+  sel.innerHTML = `<option value="">Filter berdasarkan aplikasi (belum dinilai)...</option>`;
+
+  const appsSet = new Set();
+  globalData.forEach(d => {
+    (d.not_filled || []).forEach(appName => {
+      appsSet.add(appName);
+    });
+  });
+
+  const apps = Array.from(appsSet).sort();
+  apps.forEach(app => {
+    const opt = document.createElement("option");
+    opt.value = app;
+    opt.textContent = app;
+    sel.appendChild(opt);
+  });
+}
+
+/* ==========================================
           FETCH DATA UTAMA
 ========================================== */
 fetch("data.json?" + Date.now())
@@ -580,6 +694,7 @@ fetch("data.json?" + Date.now())
   .then(js => {
     globalData = js;
     renderTable();
+    populateFilterApp();
     setLastUpdate();
   });
 
@@ -600,16 +715,23 @@ fetch("sus_scores.json?" + Date.now())
 /* ==========================================
           TAB SWITCH
 ========================================== */
-document.getElementById("tab-main").onclick = () => {
+const tabMainBtn = document.getElementById("tab-main");
+const tabSusBtn  = document.getElementById("tab-sus");
+
+tabMainBtn.onclick = () => {
   document.getElementById("section-main").classList.remove("hidden");
   document.getElementById("section-sus").classList.add("hidden");
 
-  tab-main.classList?.add("active");
+  tabMainBtn.classList.add("active");
+  tabSusBtn.classList.remove("active");
 };
 
-document.getElementById("tab-sus").onclick = () => {
+tabSusBtn.onclick = () => {
   document.getElementById("section-main").classList.add("hidden");
   document.getElementById("section-sus").classList.remove("hidden");
+
+  tabSusBtn.classList.add("active");
+  tabMainBtn.classList.remove("active");
 };
 
 /* ==========================================
@@ -618,8 +740,9 @@ document.getElementById("tab-sus").onclick = () => {
 document.getElementById("search").oninput = renderTable;
 document.getElementById("only-pending").onchange = renderTable;
 document.getElementById("filter-app").onchange = renderTable;
+document.getElementById("only-35plus").onchange = renderTable;
+document.getElementById("only-below35").onchange = renderTable;
 document.getElementById("sus-app-select").onchange = renderSusDetail;
-
 </script>
 
 </body>
