@@ -1,4 +1,5 @@
 name: Update SUS Data
+
 on:
   schedule:
     - cron: "*/20 * * * *"
@@ -11,7 +12,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # ambil full history supaya bisa pull/rebase
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -28,11 +32,15 @@ jobs:
       - name: Commit Data
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions@github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # ambil commit terbaru dari GitHub dulu
+          git pull --rebase origin main || true
+
           if [[ `git status --porcelain` ]]; then
             git add data.json
             git commit -m "Update data.json"
-            git push
+            git push origin HEAD:main
           else
             echo "No changes"
           fi
