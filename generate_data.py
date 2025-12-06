@@ -5,62 +5,53 @@ import requests
 import pandas as pd
 from datetime import datetime, timezone
 
-# ===============================
-# GENERATE TIMESTAMP UTC
-# ===============================
+# =====================================================
+# Timestamp
+# =====================================================
 generated_at = datetime.now(timezone.utc).isoformat()
 
-# ===============================
-# 1. Download file Excel SUS
-# ===============================
+# =====================================================
+# 1. Download Excel
+# =====================================================
 URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSWDG_1e6OyoSQsKp_Yy4uVAeVJOCrGPVABzv29EgoiNlhfhWV9vqOW2M6mFOvvkGbssfW3PXyH3ybM/pub?output=xlsx"
 EXCEL_FILE = "sus_responses.xlsx"
 
-print("Mengunduh file Excel...")
 resp = requests.get(URL)
 resp.raise_for_status()
 
 with open(EXCEL_FILE, "wb") as f:
     f.write(resp.content)
 
-print("Download selesai:", EXCEL_FILE)
-
-# ===============================
+# =====================================================
 # 2. Baca sheet dbresponden
-# ===============================
+# =====================================================
 xls = pd.ExcelFile(EXCEL_FILE)
-print("Membaca sheet dbresponden...")
 db = pd.read_excel(xls, "dbresponden")
 
-# Kolom penting
-required_cols = ["Nama Aplikasi", "Nama Responden (Participant)", "NIM"]
-for col in required_cols:
+# Kolom wajib
+required = ["Nama Aplikasi", "Nama Responden (Participant)", "NIM", "Jumlah"]
+for col in required:
     if col not in db.columns:
-        raise RuntimeError(f"Kolom wajib '{col}' tidak ditemukan di sheet dbresponden")
+        raise RuntimeError(f"Kolom wajib '{col}' tidak ditemukan.")
 
 apps_col = db["Nama Aplikasi"].astype(str).str.strip()
 participants = db["Nama Responden (Participant)"].astype(str).str.strip()
-nims_raw = db["NIM"]
 
-# ===============================
-# Helper: normalisasi NIM
-# ===============================
 def normalize_nim(x):
     s = str(x).strip()
-    if s.lower() == "nan" or s == "":
+    if s == "" or s.lower() == "nan":
         return ""
     if s.endswith(".0"):
-        return s[:-2]
+        s = s[:-2]
     return s
 
-participants_nim_norm = nims_raw.map(normalize_nim)
+db["NIM_norm"] = db["NIM"].map(normalize_nim)
+participants_nim_norm = db["NIM_norm"]
 participants_norm_name = participants.str.lower()
 
-db["NIM_norm"] = participants_nim_norm
-
-# ===============================
-# 3. Parsing app_full → nama app, nim, creator
-# ===============================
+# =====================================================
+# 3. Parsing Nama Aplikasi
+# =====================================================
 def parse_app_full(app_full: str):
     app_full = str(app_full).strip()
     app_name = app_full.split("(", 1)[0].strip()
@@ -71,17 +62,20 @@ def parse_app_full(app_full: str):
 
     inside = m.group(1).strip()
     parts = inside.split()
+
     if len(parts) < 2:
         nim = normalize_nim(parts[0]) if parts else ""
         name = inside
     else:
         nim = normalize_nim(parts[0])
         name = " ".join(parts[1:])
+
     return app_name, nim, name
 
-# ===============================
-# 4. Map pembuat aplikasi
-# ===============================
+
+# =====================================================
+# 4. Pembuat Aplikasi
+# =====================================================
 app_info_map = {}
 for app_full in set(apps_col):
     app_name, nim_raw, owner_name = parse_app_full(app_full)
@@ -95,9 +89,7 @@ for app_full in set(apps_col):
 creators_by_nim = {}
 for info in app_info_map.values():
     nim_norm = info["nim"]
-    if not nim_norm:
-        continue
-    if nim_norm not in creators_by_nim:
+    if nim_norm and nim_norm not in creators_by_nim:
         creators_by_nim[nim_norm] = {
             "name": info["name"],
             "nim": info["nim"],
@@ -107,44 +99,33 @@ for info in app_info_map.values():
 
 all_creators = list(creators_by_nim.values())
 
-# ===============================
-# 5. Hitung jumlah pengisi tiap aplikasi
-# ===============================
-app_full_count_map = apps_col.value_counts().to_dict()
 
-# ===============================
-# 6. Buat data.json
-# ===============================
+# =====================================================
+# 5. Rekap data.json
+# =====================================================
+app_full_count = apps_col.value_counts().to_dict()
+
 result = []
 
 for creator in all_creators:
     owner_name = creator["name"]
     owner_app = creator["app"]
     owner_nim_norm = creator["nim_norm"]
-    owner_name_norm = owner_name.lower().strip()
 
-    # dia mengisi form berapa kali
     mask_nim = (participants_nim_norm == owner_nim_norm)
-    mask = mask_nim if mask_nim.any() else (participants_norm_name == owner_name_norm)
+    mask = mask_nim if mask_nim.any() else (participants_norm_name == owner_name.lower().strip())
     filled_count = int(mask.sum())
 
     rated_apps_full = apps_col[mask].unique()
-    rated_app_names = set()
-
-    for af in rated_apps_full:
-        info = app_info_map.get(af)
-        rated_app_names.add(info["app"] if info else parse_app_full(af)[0])
+    rated_names = {app_info_map.get(af, {}).get("app", parse_app_full(af)[0]) for af in rated_apps_full}
 
     not_filled = sorted({
         other["app"] for other in all_creators
-        if other["nim_norm"] != owner_nim_norm and other["app"] not in rated_app_names
+        if other["nim_norm"] != owner_nim_norm and other["app"] not in rated_names
     })
 
-    app_fulls_for_owner = [
-        af for af, info in app_info_map.items()
-        if info["nim"] == owner_nim_norm
-    ]
-    app_filled_count = sum(app_full_count_map.get(af, 0) for af in app_fulls_for_owner)
+    owner_fulls = [af for af, info in app_info_map.items() if info["nim"] == owner_nim_norm]
+    app_filled_count = sum(app_full_count.get(af, 0) for af in owner_fulls)
 
     result.append({
         "name": owner_name,
@@ -158,9 +139,10 @@ for creator in all_creators:
 
 result = sorted(result, key=lambda x: x["name"].lower())
 
-# ===============================
-# 7. nim_issues.json
-# ===============================
+
+# =====================================================
+# 6. nim_issues.json
+# =====================================================
 nim_issues = []
 grouped = db.groupby("Nama Responden (Participant)")
 
@@ -169,20 +151,21 @@ for name, sub in grouped:
         normalize_nim(n) for n in sub["NIM_norm"].unique()
         if normalize_nim(n)
     })
+
     if len(unique_nims) > 1:
         counts = sub.groupby("NIM_norm").size().to_dict()
         nim_issues.append({
-            "name": str(name).strip(),
+            "name": name,
             "nims": unique_nims,
             "nim_counts": {normalize_nim(k): int(v) for k, v in counts.items()},
             "total_rows": int(sub.shape[0]),
             "generated_at": generated_at
         })
 
-# ===============================
-# 8. SUS SCORES + Q1–Q10 + S1–S10
-# ===============================
 
+# =====================================================
+# 7. SUS QUESTIONS + SCORES
+# =====================================================
 SUS_QUESTIONS = {
     1: "Saya merasa akan sering menggunakan sistem ini",
     2: "Saya merasa sistem ini rumit untuk digunakan",
@@ -198,18 +181,18 @@ SUS_QUESTIONS = {
 
 question_col_map = {}
 for i in range(1, 11):
-    qtext = SUS_QUESTIONS[i].strip().lower()
     for col in db.columns:
-        if str(col).strip().lower() == qtext:
+        if col.strip().lower() == SUS_QUESTIONS[i].strip().lower():
             question_col_map[i] = col
             break
 
 sus_map = {}
 
 for _, row in db.iterrows():
-    app_full = str(row["Nama Aplikasi"]).strip()
-    if not app_full:
+    app_full = row["Nama Aplikasi"]
+    if not isinstance(app_full, str):
         continue
+    app_full = app_full.strip()
 
     app_name, owner_nim_raw, owner_name = parse_app_full(app_full)
     owner_nim_norm = normalize_nim(owner_nim_raw)
@@ -219,34 +202,30 @@ for _, row in db.iterrows():
     except:
         continue
 
-    sus_score = jumlah_raw * 2.5
+    sus_total = jumlah_raw * 2.5
 
-    respondent_name = str(row["Nama Responden (Participant)"]).strip()
+    respondent_name = row["Nama Responden (Participant)"]
     respondent_nim = normalize_nim(row["NIM"])
 
     qvals = {}
-    qscores = {}
+    svals = {}
 
     for qi in range(1, 11):
         col = question_col_map.get(qi)
-        if not col:
+        raw = row[col] if col else None
+
+        if raw is None or pd.isna(raw):
             qvals[f"q{qi}"] = None
-            qscores[f"s{qi}"] = None
+            svals[f"s{qi}"] = None
             continue
+        
+        raw = int(raw)
+        qvals[f"q{qi}"] = raw
 
-        val = row[col]
-        if pd.isna(val):
-            qvals[f"q{qi}"] = None
-            qscores[f"s{qi}"] = None
-            continue
-
-        val = int(val)
-        qvals[f"q{qi}"] = val
-
-        if qi % 2 == 1:
-            qscores[f"s{qi}"] = val - 1
-        else:
-            qscores[f"s{qi}"] = 5 - val
+        if qi % 2 == 1:  # Positive
+            svals[f"s{qi}"] = raw - 1
+        else:           # Negative
+            svals[f"s{qi}"] = 5 - raw
 
     key = (app_name, owner_nim_norm, owner_name)
     if key not in sus_map:
@@ -258,17 +237,22 @@ for _, row in db.iterrows():
             "responses": []
         }
 
-    sus_map[key]["scores"].append(sus_score)
+    sus_map[key]["scores"].append(sus_total)
+
     sus_map[key]["responses"].append({
         "respondent_name": respondent_name,
         "respondent_nim": respondent_nim,
         "jumlah_raw": jumlah_raw,
-        "sus": sus_score,
+        "sus": sus_total,
         **qvals,
-        **qscores,
+        **svals,
         "generated_at": generated_at
     })
 
+
+# =====================================================
+# 8. Final sus_scores.json
+# =====================================================
 sus_scores = []
 for key, entry in sus_map.items():
     avg = sum(entry["scores"]) / len(entry["scores"])
@@ -282,11 +266,12 @@ for key, entry in sus_map.items():
         "generated_at": generated_at
     })
 
-# ===============================
-# 9. SIMPAN JSON
-# ===============================
+
+# =====================================================
+# 9. Save JSON
+# =====================================================
 json.dump(result, open("data.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
 json.dump(nim_issues, open("nim_issues.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
 json.dump(sus_scores, open("sus_scores.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
 
-print("Berhasil membuat data.json, nim_issues.json, sus_scores.json")
+print("JSON generated successfully.")

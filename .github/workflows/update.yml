@@ -11,8 +11,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -22,14 +23,14 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
           pip install pandas openpyxl requests
 
       - name: Generate data
         run: python generate_data.py
 
-      - name: Commit output JSON
+      - name: Commit results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -38,7 +39,7 @@ jobs:
 
           if [[ `git status --porcelain` ]]; then
             git add data.json nim_issues.json sus_scores.json
-            git commit -m "Auto update JSON"
+            git commit -m "Auto update JSON data"
             git push origin HEAD:main
           else
             echo "No changes"
