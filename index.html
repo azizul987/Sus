@@ -99,7 +99,7 @@
 
     .tab-btn.active {
       background: #fff;
-      color: var(--primary);
+      color: --primary;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       font-weight: 600;
     }
@@ -146,6 +146,26 @@
       cursor: pointer;
       color: #4b5563;
       user-select: none;
+    }
+
+    /* Tombol unduh CSV/Excel */
+    .download-btn {
+      margin-left: auto;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      color: #111827;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .download-btn:hover {
+      background: #f9fafb;
+      border-color: #9ca3af;
     }
 
     /* Card & Table */
@@ -299,7 +319,7 @@
       padding: 4px 0;
       font-size: 13px;
       font-weight: 500;
-      color: var(--primary);
+      color: #4f46e5;
       cursor: pointer;
       text-decoration: underline;
     }
@@ -339,8 +359,18 @@
         </label>
         <label class="checkbox-label">
           <input type="checkbox" id="only-below35" />
-          < 35 terisi
+          &lt; 35 terisi
         </label>
+
+        <!-- TOMBOL UNDUH (pakai link yang Anda berikan) -->
+        <a
+          class="download-btn"
+          href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSWDG_1e6OyoSQsKp_Yy4uVAeVJOCrGPVABzv29EgoiNlhfhWV9vqOW2M6mFOvvkGbssfW3PXyH3ybM/pub?output=xlsx"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Unduh CSV/Excel
+        </a>
       </div>
 
       <div class="card">
@@ -410,6 +440,7 @@ let globalData = [];
 let nimIssues = [];
 let susData = [];
 
+// ========== WAKTU UPDATE ==========
 function setLastUpdate() {
   const el = document.getElementById("last-update");
 
@@ -435,6 +466,7 @@ function setLastUpdate() {
     });
 }
 
+// ========== TABEL REKAP ==========
 function renderTable() {
   const tbody = document.getElementById("tbody");
   const search = document.getElementById("search").value.toLowerCase();
@@ -488,6 +520,7 @@ function renderTable() {
   });
 }
 
+// ========== NIM BERMASALAH ==========
 function renderNimIssues() {
   const tbody = document.getElementById("tbody-nim");
   tbody.innerHTML = "";
@@ -510,6 +543,7 @@ function renderNimIssues() {
   });
 }
 
+// ========== DETAIL SUS ==========
 function showSusResponseDetail(entry, idx) {
   const panel = document.getElementById("sus-detail-panel");
   const r = entry.responses[idx];
@@ -633,6 +667,7 @@ function populateFilterApp() {
   });
 }
 
+// ========== FETCH DATA ==========
 fetch("data.json?" + Date.now())
   .then(r => r.json())
   .then(js => {
@@ -656,18 +691,25 @@ fetch("sus_scores.json?" + Date.now())
     populateSusAppSelect();
   });
 
-document.getElementById("tab-main").onclick = () => {
+// ========== TAB HANDLER ==========
+const tabMain = document.getElementById("tab-main");
+const tabSus = document.getElementById("tab-sus");
+
+tabMain.onclick = () => {
   document.getElementById("section-main").classList.remove("hidden");
   document.getElementById("section-sus").classList.add("hidden");
-  tab-main.classList.add("active");
-  tab-sus.classList.remove("active");
+  tabMain.classList.add("active");
+  tabSus.classList.remove("active");
 };
 
-document.getElementById("tab-sus").onclick = () => {
+tabSus.onclick = () => {
   document.getElementById("section-main").classList.add("hidden");
   document.getElementById("section-sus").classList.remove("hidden");
+  tabMain.classList.remove("active");
+  tabSus.classList.add("active");
 };
 
+// ========== FILTER HANDLER ==========
 document.getElementById("search").oninput = renderTable;
 document.getElementById("only-pending").onchange = renderTable;
 document.getElementById("filter-app").onchange = renderTable;

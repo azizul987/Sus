@@ -112,18 +112,26 @@ for creator in all_creators:
     owner_app = creator["app"]
     owner_nim_norm = creator["nim_norm"]
 
+    # baris responden yang punya NIM sama
     mask_nim = (participants_nim_norm == owner_nim_norm)
+    # kalau tidak ada, fallback ke nama
     mask = mask_nim if mask_nim.any() else (participants_norm_name == owner_name.lower().strip())
     filled_count = int(mask.sum())
 
+    # aplikasi-aplikasi yang sudah dia nilai
     rated_apps_full = apps_col[mask].unique()
-    rated_names = {app_info_map.get(af, {}).get("app", parse_app_full(af)[0]) for af in rated_apps_full}
+    rated_names = {
+        app_info_map.get(af, {}).get("app", parse_app_full(af)[0])
+        for af in rated_apps_full
+    }
 
+    # daftar aplikasi orang lain yang belum dia nilai
     not_filled = sorted({
         other["app"] for other in all_creators
         if other["nim_norm"] != owner_nim_norm and other["app"] not in rated_names
     })
 
+    # total respon yang masuk untuk aplikasi milik dia
     owner_fulls = [af for af, info in app_info_map.items() if info["nim"] == owner_nim_norm]
     app_filled_count = sum(app_full_count.get(af, 0) for af in owner_fulls)
 
@@ -199,7 +207,7 @@ for _, row in db.iterrows():
 
     try:
         jumlah_raw = float(row["Jumlah"])
-    except:
+    except Exception:
         continue
 
     sus_total = jumlah_raw * 2.5
@@ -212,7 +220,7 @@ for _, row in db.iterrows():
 
     for qi in range(1, 11):
         col = question_col_map.get(qi)
-        raw = row[col] if col else None
+        raw = row[col] if col in row else None
 
         if raw is None or pd.isna(raw):
             qvals[f"q{qi}"] = None
@@ -270,8 +278,13 @@ for key, entry in sus_map.items():
 # =====================================================
 # 9. Save JSON
 # =====================================================
-json.dump(result, open("data.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
-json.dump(nim_issues, open("nim_issues.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
-json.dump(sus_scores, open("sus_scores.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
+with open("data.json", "w", encoding="utf-8") as f:
+    json.dump(result, f, ensure_ascii=False, indent=2)
+
+with open("nim_issues.json", "w", encoding="utf-8") as f:
+    json.dump(nim_issues, f, ensure_ascii=False, indent=2)
+
+with open("sus_scores.json", "w", encoding="utf-8") as f:
+    json.dump(sus_scores, f, ensure_ascii=False, indent=2)
 
 print("JSON generated successfully.")
