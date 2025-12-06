@@ -3,7 +3,7 @@ name: Update SUS Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/20 * * * *"
+    - cron: "*/20 * * * *" # jalan tiap 20 menit (UTC)
 
 permissions:
   contents: write
@@ -35,11 +35,19 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git pull --rebase origin main || true
+          # cek apakah ada perubahan file
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "Changes detected, committing..."
 
-          if [[ `git status --porcelain` ]]; then
+            # add semua file JSON yang berubah
             git add *.json
+
             git commit -m "Auto update JSON data"
+
+            # ambil commit terbaru dari remote lalu rebase commit kita di atasnya
+            git pull --rebase origin main
+
+            # push ke branch main
             git push origin HEAD:main
           else
             echo "No changes"
