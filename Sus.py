@@ -148,7 +148,8 @@ print(f"Jumlah pembuat aplikasi unik (berdasarkan NIM): {len(result)}")
 os.makedirs("public", exist_ok=True)
 output_path = os.path.join("public", "data.json")
 
-with open(output_path, "w", encoding="utf-8") as f:
+with open("data.json", "w", encoding="utf-8") as f:
     json.dump(result, f, ensure_ascii=False, indent=2)
+
 
 print("Berhasil membuat:", output_path)
