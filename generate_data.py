@@ -26,22 +26,13 @@ xls = pd.ExcelFile(EXCEL_FILE)
 print("Membaca sheet dbresponden...")
 db = pd.read_excel(xls, "dbresponden")
 
-# Pastikan kolom yang dipakai ada
-required_cols = ["Nama Aplikasi", "Nama Responden (Participant)", "NIM"]
-for col in required_cols:
-    if col not in db.columns:
-        raise RuntimeError(f"Kolom wajib '{col}' tidak ditemukan di sheet dbresponden")
-
+# Kolom penting
 apps_col = db["Nama Aplikasi"].astype(str).str.strip()
 participants = db["Nama Responden (Participant)"].astype(str).str.strip()
 nims_raw = db["NIM"]
 
 # ===============================
-# Fungsi normalisasi NIM
-# - ubah ke string
-# - buang spasi
-# - hilangkan akhiran '.0' kalau ada
-# - kosongkan kalau 'nan'
+# Normalisasi NIM
 # ===============================
 def normalize_nim(x):
     s = str(x).strip()
@@ -54,10 +45,10 @@ def normalize_nim(x):
 participants_nim_norm = nims_raw.map(normalize_nim)
 participants_norm_name = participants.str.lower()
 
+db["NIM_norm"] = participants_nim_norm
+
 # ===============================
-# 3. Fungsi parsing "Nama Aplikasi"
-#    Contoh: "MatchMate (09021282429106  Arkhan Syahputra)"
-#    -> app_name="MatchMate", nim="09021282429106", name="Arkhan Syahputra"
+# 3. Parsing nama aplikasi
 # ===============================
 def parse_app_full(app_full: str):
     app_full = str(app_full).strip()
@@ -65,7 +56,6 @@ def parse_app_full(app_full: str):
 
     m = re.search(r"\((.*)\)", app_full)
     if not m:
-        # fallback kalau format aneh
         return app_name, "", app_full
 
     inside = m.group(1).strip()
@@ -79,8 +69,7 @@ def parse_app_full(app_full: str):
     return app_name, nim, name
 
 # ===============================
-# 4. Bangun info pembuat aplikasi,
-#    lalu dedup berdasarkan NIM
+# 4. Buat map pembuat aplikasi
 # ===============================
 app_info_map = {}
 for app_full in set(apps_col):
@@ -92,48 +81,41 @@ for app_full in set(apps_col):
         "name": owner_name,
     }
 
-creators_by_nim = {}  # nim_norm -> {name, nim, nim_norm, app}
+creators_by_nim = {}  # nim_norm -> data pembuat
 for info in app_info_map.values():
     nim_norm = info["nim"]
     if not nim_norm:
-        # kalau tidak ada NIM, skip dari daftar "creator utama"
         continue
-
     if nim_norm not in creators_by_nim:
         creators_by_nim[nim_norm] = {
             "name": info["name"],
-            "nim": info["nim"],      # versi mentah
-            "nim_norm": nim_norm,    # versi normalize
+            "nim": info["nim"],
+            "nim_norm": nim_norm,
             "app": info["app"],
         }
-    # kalau nim_norm sudah ada, biarkan entry pertama sebagai acuan
 
 all_creators = list(creators_by_nim.values())
 
-print(f"Jumlah pembuat aplikasi unik (berdasarkan NIM): {len(all_creators)}")
+# ===============================
+# 5. Hitung jumlah pengisi aplikasi (NEW!)
+# ===============================
+# app_full_count_map = berapa banyak baris memilih aplikasi ini
+app_full_count_map = apps_col.value_counts().to_dict()
 
 # ===============================
-# 5. Hitung:
-#    - berapa kali tiap pembuat isi form (filled) berbasis NIM
-#    - aplikasi mana yang belum dia nilai (not_filled)
+# 6. Hitung aktivitas tiap pembuat
 # ===============================
 result = []
-
-# Siapkan set semua nama aplikasi unik (berdasarkan creator)
-all_app_names = sorted({c["app"] for c in all_creators})
 
 for creator in all_creators:
     owner_name = creator["name"]
     owner_app = creator["app"]
     owner_nim_norm = creator["nim_norm"]
-    owner_name_norm = owner_name.strip().lower()
+    owner_name_norm = owner_name.lower().strip()
 
-    # 1) Cari baris di mana dia menjadi responden:
-    #    Utama: berdasarkan NIM
+    # 1) Hitung jumlah dia menjadi responden
     mask_nim = (participants_nim_norm == owner_nim_norm)
 
-    # Fallback: kalau baris berdasarkan NIM 0 (misal NIM responden salah / kosong),
-    # pakai pencocokan nama (case-insensitive)
     if not mask_nim.any():
         mask = (participants_norm_name == owner_name_norm)
     else:
@@ -141,44 +123,74 @@ for creator in all_creators:
 
     filled_count = int(mask.sum())
 
-    # 2) Aplikasi yang sudah dia nilai
+    # 2) Ambil aplikasi yang sudah dia nilai
     rated_apps_full = apps_col[mask].unique()
+
     rated_app_names = set()
     for af in rated_apps_full:
         info = app_info_map.get(af)
         if info:
             rated_app_names.add(info["app"])
         else:
-            # fallback kalau tidak ada di map
-            app_name_tmp, _, _ = parse_app_full(af)
-            rated_app_names.add(app_name_tmp)
+            rated_app_names.add(parse_app_full(af)[0])
 
-    # 3) Aplikasi yang belum dia nilai (hanya aplikasi milik orang lain)
+    # 3) Hitung aplikasi yang belum dinilai
     not_filled_set = set()
     for other in all_creators:
         if other["nim_norm"] == owner_nim_norm:
-            continue  # lewati aplikasinya sendiri
+            continue
         if other["app"] not in rated_app_names:
             not_filled_set.add(other["app"])
 
     not_filled_list = sorted(not_filled_set)
 
+    # 4) Hitung jumlah pengisi aplikasi miliknya
+    #    Cari app_full yang memiliki owner_nim
+    app_fulls_for_owner = [
+        af for af, info in app_info_map.items()
+        if info["nim"] == owner_nim_norm
+    ]
+
+    app_filled_count = sum(app_full_count_map.get(af, 0) for af in app_fulls_for_owner)
+
+    # SIMPAN
     result.append({
-        "name": owner_name,          # nama pembuat aplikasi
-        "nim": creator["nim"],       # NIM pembuat
-        "app": owner_app,            # aplikasi miliknya
-        "filled": filled_count,      # berapa kali dia isi form
-        "not_filled": not_filled_list,  # list nama aplikasi yang belum dia nilai
+        "name": owner_name,
+        "nim": creator["nim"],
+        "app": owner_app,
+        "filled": filled_count,
+        "app_filled_count": app_filled_count,  # JUMLAH ORANG MENGISI APLIKASINYA
+        "not_filled": not_filled_list
     })
 
-# urutkan biar rapi
 result = sorted(result, key=lambda x: x["name"].lower())
 
 # ===============================
-# 6. Simpan ke data.json (di root)
+# 7. Hitung NIM bermasalah
 # ===============================
-OUTPUT_FILE = "data.json"
-with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+nim_issues = []
+grouped = db.groupby("Nama Responden (Participant)")
+
+for name, sub in grouped:
+    unique_nims = sorted({normalize_nim(n) for n in sub["NIM_norm"].unique() if normalize_nim(n)})
+    if len(unique_nims) > 1:
+        counts = sub.groupby("NIM_norm").size().to_dict()
+        nim_issues.append({
+            "name": str(name).strip(),
+            "nims": unique_nims,
+            "nim_counts": counts,
+            "total_rows": int(sub.shape[0])
+        })
+
+nim_issues = sorted(nim_issues, key=lambda x: x["name"].lower())
+
+# ===============================
+# 8. Save
+# ===============================
+with open("data.json", "w", encoding="utf-8") as f:
     json.dump(result, f, ensure_ascii=False, indent=2)
 
-print(f"Berhasil membuat: {OUTPUT_FILE}")
+with open("nim_issues.json", "w", encoding="utf-8") as f:
+    json.dump(nim_issues, f, ensure_ascii=False, indent=2)
+
+print("Berhasil membuat: data.json & nim_issues.json")

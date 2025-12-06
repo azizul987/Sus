@@ -23,6 +23,10 @@
       margin: 0 0 4px;
       font-size: 24px;
     }
+    h2 {
+      margin: 24px 0 8px;
+      font-size: 18px;
+    }
     .subtitle {
       margin: 0 0 20px;
       color: #666;
@@ -35,12 +39,19 @@
       align-items: center;
       margin-bottom: 16px;
     }
-    .search-input {
+    .search-input,
+    .select-input {
       padding: 6px 10px;
       border-radius: 6px;
       border: 1px solid #ccc;
-      min-width: 220px;
       font-size: 13px;
+    }
+    .search-input {
+      min-width: 220px;
+    }
+    .select-input {
+      min-width: 180px;
+      background: #fff;
     }
     .checkbox-label {
       display: inline-flex;
@@ -56,6 +67,7 @@
       box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
       padding: 16px 16px 8px;
       overflow-x: auto;
+      margin-top: 8px;
     }
     table {
       border-collapse: collapse;
@@ -116,6 +128,10 @@
       font-size: 11px;
       color: #777;
     }
+    .small {
+      font-size: 11px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
@@ -133,12 +149,19 @@
         type="text"
         placeholder="Cari nama / NIM / aplikasi..."
       />
+
+      <!-- FILTER APLIKASI -->
+      <select id="filter-app" class="select-input">
+        <option value="">Filter berdasarkan aplikasi yang belum dinilai...</option>
+      </select>
+
       <label class="checkbox-label">
         <input type="checkbox" id="only-pending" />
         Tampilkan hanya yang masih punya aplikasi belum dinilai
       </label>
     </div>
 
+    <!-- TABEL UTAMA -->
     <div class="card">
       <table>
         <thead>
@@ -148,13 +171,36 @@
             <th>NIM</th>
             <th>Aplikasi</th>
             <th>Jumlah Isi</th>
+            <th>Jumlah Terisi</th> <!-- baru -->
             <th>Status Penilaian</th>
             <th>Belum Menilai Aplikasi</th>
           </tr>
         </thead>
         <tbody id="tbody">
           <tr>
-            <td colspan="7">Memuat data...</td>
+            <td colspan="8">Memuat data...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TABEL NIM BERMASALAH -->
+    <h2>Responden dengan NIM tidak konsisten</h2>
+    <p class="small">
+      Daftar nama responden yang menggunakan lebih dari satu NIM berbeda ketika mengisi form SUS.
+    </p>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nama Responden</th>
+            <th>Detail NIM yang dipakai</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-nim">
+          <tr>
+            <td colspan="3">Memuat data NIM...</td>
           </tr>
         </tbody>
       </table>
@@ -167,11 +213,13 @@
 
   <script>
     let globalData = [];
+    let nimIssues = [];
 
     function renderTable() {
       const tbody = document.getElementById("tbody");
       const search = document.getElementById("search").value.toLowerCase().trim();
       const onlyPending = document.getElementById("only-pending").checked;
+      const filterApp = document.getElementById("filter-app").value;
 
       tbody.innerHTML = "";
 
@@ -183,14 +231,20 @@
           " " +
           (d.app || "");
         const matchesSearch = text.toLowerCase().includes(search);
-        const pending = (d.not_filled || []).length > 0;
+
+        const notFilled = d.not_filled || [];
+        const pending = notFilled.length > 0;
         const matchesPending = !onlyPending || pending;
-        return matchesSearch && matchesPending;
+
+        const matchesApp =
+          !filterApp || notFilled.includes(filterApp);
+
+        return matchesSearch && matchesPending && matchesApp;
       });
 
       if (filtered.length === 0) {
         const tr = document.createElement("tr");
-        tr.innerHTML = `<td colspan="7">Tidak ada data untuk filter saat ini.</td>`;
+        tr.innerHTML = `<td colspan="8">Tidak ada data untuk filter saat ini.</td>`;
         tbody.appendChild(tr);
         return;
       }
@@ -206,6 +260,7 @@
           <td>${d.nim || "-"}</td>
           <td>${d.app || "-"}</td>
           <td>${d.filled ?? 0}</td>
+          <td>${d.app_filled_count ?? 0}</td>
           <td>
             ${
               pending
@@ -229,10 +284,37 @@
       });
     }
 
+    function renderNimIssues() {
+      const tbody = document.getElementById("tbody-nim");
+      tbody.innerHTML = "";
+
+      if (!Array.isArray(nimIssues) || nimIssues.length === 0) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td colspan="3">Tidak ada nama dengan NIM tidak konsisten.</td>`;
+        tbody.appendChild(tr);
+        return;
+      }
+
+      nimIssues.forEach((row, index) => {
+        const nims = row.nims || [];
+        const counts = row.nim_counts || {};
+        const detail = nims
+          .map((nim) => `${nim} (${counts[nim] ?? 0}x)`)
+          .join(", ");
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${row.name || "-"}</td>
+          <td>${detail}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
     function setLastUpdate() {
       const el = document.getElementById("last-update");
       try {
-        // pakai Last-Modified dari response kalau ada
         fetch("data.json?" + Date.now(), { method: "HEAD" })
           .then((r) => {
             const lm = r.headers.get("Last-Modified");
@@ -244,6 +326,24 @@
       } catch (e) {}
     }
 
+    function populateAppFilter() {
+      const select = document.getElementById("filter-app");
+      const appSet = new Set();
+      globalData.forEach((d) => {
+        (d.not_filled || []).forEach((app) => appSet.add(app));
+      });
+      const apps = Array.from(appSet).sort();
+
+      select.innerHTML = `<option value="">Filter berdasarkan aplikasi yang belum dinilai...</option>`;
+      apps.forEach((app) => {
+        const opt = document.createElement("option");
+        opt.value = app;
+        opt.textContent = app;
+        select.appendChild(opt);
+      });
+    }
+
+    // Fetch data utama
     fetch("data.json?" + Date.now())
       .then((r) => {
         if (!r.ok) {
@@ -256,17 +356,37 @@
           throw new Error("Format data.json tidak sesuai (bukan array).");
         }
         globalData = data;
+        populateAppFilter();
         renderTable();
         setLastUpdate();
       })
       .catch((err) => {
         console.error(err);
         const tbody = document.getElementById("tbody");
-        tbody.innerHTML = `<tr><td colspan="7">Error memuat data: ${err.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8">Error memuat data: ${err.message}</td></tr>`;
+      });
+
+    // Fetch data NIM bermasalah
+    fetch("nim_issues.json?" + Date.now())
+      .then((r) => {
+        if (!r.ok) {
+          throw new Error("nim_issues.json tidak ditemukan");
+        }
+        return r.json();
+      })
+      .then((data) => {
+        nimIssues = Array.isArray(data) ? data : [];
+        renderNimIssues();
+      })
+      .catch((err) => {
+        console.warn(err.message);
+        const tbody = document.getElementById("tbody-nim");
+        tbody.innerHTML = `<tr><td colspan="3">Tidak ada data NIM bermasalah atau nim_issues.json belum dibuat.</td></tr>`;
       });
 
     document.getElementById("search").addEventListener("input", renderTable);
     document.getElementById("only-pending").addEventListener("change", renderTable);
+    document.getElementById("filter-app").addEventListener("change", renderTable);
   </script>
 </body>
 </html>
