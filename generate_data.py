@@ -145,11 +145,7 @@ result = sorted(result, key=lambda x: x["name"].lower())
 print(f"Jumlah pembuat aplikasi unik (berdasarkan NIM): {len(result)}")
 
 # 5. Simpan ke public/data.json
-os.makedirs("public", exist_ok=True)
-output_path = os.path.join("public", "data.json")
-
 with open("data.json", "w", encoding="utf-8") as f:
     json.dump(result, f, ensure_ascii=False, indent=2)
 
-
-print("Berhasil membuat:", output_path)
+print("Berhasil membuat:", "data.json")
