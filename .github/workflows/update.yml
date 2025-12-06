@@ -1,9 +1,9 @@
 name: Update SUS Data
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "*/20 * * * *"
-  workflow_dispatch:
 
 permissions:
   contents: write
@@ -38,7 +38,7 @@ jobs:
           git pull --rebase origin main || true
 
           if [[ `git status --porcelain` ]]; then
-            git add data.json nim_issues.json sus_scores.json
+            git add *.json
             git commit -m "Auto update JSON data"
             git push origin HEAD:main
           else
