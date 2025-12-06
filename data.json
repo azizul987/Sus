@@ -3,28 +3,16 @@
     "name": "Adiel Zinio Putra Saragih",
     "nim": "09021282429113",
     "app": "UNSRIverse",
-    "filled": 16,
+    "filled": 27,
     "app_filled_count": 19,
-    "not_filled": [
-      "Duelist Exchange",
-      "E-Resep",
-      "GOORDER",
-      "LiterLens",
-      "Nekodeals",
-      "Rolla",
-      "SkillSwap",
-      "TEMUNSRI",
-      "Travel Unsri",
-      "Unsri Horor",
-      "YukSehat!"
-    ]
+    "not_filled": []
   },
   {
     "name": "Amirul Nur Cahyo",
     "nim": "09021282429093",
     "app": "Travel Unsri",
     "filled": 15,
-    "app_filled_count": 27,
+    "app_filled_count": 28,
     "not_filled": [
       "Chooskin",
       "Duelist Exchange",
@@ -45,7 +33,7 @@
     "nim": "09021282429117",
     "app": "SkillSwap",
     "filled": 14,
-    "app_filled_count": 25,
+    "app_filled_count": 26,
     "not_filled": [
       "BUSRI",
       "Chooskin",
@@ -83,7 +71,7 @@
     "nim": "09021282429106",
     "app": "MatchMate",
     "filled": 22,
-    "app_filled_count": 42,
+    "app_filled_count": 43,
     "not_filled": [
       "Chooskin",
       "Galon-BG",
@@ -116,7 +104,7 @@
     "nim": "09021282429097",
     "app": "TEMUNSRI",
     "filled": 25,
-    "app_filled_count": 31,
+    "app_filled_count": 32,
     "not_filled": [
       "GOORDER",
       "TugasKu"
@@ -135,7 +123,7 @@
     "nim": "09021282429091",
     "app": "Nekodeals",
     "filled": 15,
-    "app_filled_count": 28,
+    "app_filled_count": 29,
     "not_filled": [
       "Book It!",
       "Chooskin",
@@ -192,7 +180,7 @@
     "nim": "09021282429108",
     "app": "Duelist Exchange",
     "filled": 27,
-    "app_filled_count": 21,
+    "app_filled_count": 22,
     "not_filled": []
   },
   {
@@ -288,7 +276,7 @@
     "nim": "09021282429086",
     "app": "YukSehat!",
     "filled": 30,
-    "app_filled_count": 47,
+    "app_filled_count": 48,
     "not_filled": []
   },
   {
@@ -337,7 +325,7 @@
     "nim": "09021282429118",
     "app": "GOORDER",
     "filled": 8,
-    "app_filled_count": 18,
+    "app_filled_count": 20,
     "not_filled": [
       "BUSRI",
       "Chooskin",
@@ -365,7 +353,7 @@
     "nim": "09021282429105",
     "app": "Unsri Horor",
     "filled": 26,
-    "app_filled_count": 24,
+    "app_filled_count": 25,
     "not_filled": [
       "Duelist Exchange",
       "Jasa-kuy"
@@ -375,11 +363,10 @@
     "name": "Rizki Ardiansyah",
     "nim": "09021282429114",
     "app": "NgEvent",
-    "filled": 26,
+    "filled": 27,
     "app_filled_count": 38,
     "not_filled": [
-      "Defriend",
-      "GOORDER"
+      "Defriend"
     ]
   },
   {
@@ -387,7 +374,7 @@
     "nim": "09021282429109",
     "app": "Rolla",
     "filled": 14,
-    "app_filled_count": 32,
+    "app_filled_count": 33,
     "not_filled": [
       "BUSRI",
       "Defriend",
@@ -409,7 +396,7 @@
     "nim": "09021282429084",
     "app": "LiterLens",
     "filled": 26,
-    "app_filled_count": 20,
+    "app_filled_count": 21,
     "not_filled": [
       "MenuBunda+"
     ]
@@ -419,7 +406,7 @@
     "nim": "09021282429096",
     "app": "E-Resep",
     "filled": 30,
-    "app_filled_count": 22,
+    "app_filled_count": 23,
     "not_filled": []
   }
 ]
