@@ -3,7 +3,7 @@ name: Update SUS Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/20 * * * *" # jalan tiap 20 menit (UTC)
+    - cron: "*/10 * * * *" # jalan tiap 10 menit (UTC)
 
 permissions:
   contents: write
