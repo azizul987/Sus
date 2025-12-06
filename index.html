@@ -24,34 +24,57 @@
       font-size: 24px;
     }
     h2 {
-      margin: 24px 0 8px;
+      margin: 16px 0 8px;
       font-size: 18px;
     }
     .subtitle {
-      margin: 0 0 20px;
+      margin: 0 0 16px;
       color: #666;
       font-size: 13px;
+    }
+    .tabs {
+      display: inline-flex;
+      border-radius: 999px;
+      background: #e2e8f0;
+      padding: 3px;
+      margin-bottom: 16px;
+      gap: 4px;
+    }
+    .tab-btn {
+      border: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      background: transparent;
+      cursor: pointer;
+      color: #475569;
+    }
+    .tab-btn.active {
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.2);
+      color: #0f172a;
+      font-weight: 600;
     }
     .toolbar {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .search-input,
     .select-input {
       padding: 6px 10px;
       border-radius: 6px;
-      border: 1px solid #ccc;
+      border: 1px solid #cbd5f5;
       font-size: 13px;
+      background: #fff;
     }
     .search-input {
       min-width: 220px;
     }
     .select-input {
-      min-width: 180px;
-      background: #fff;
+      min-width: 200px;
     }
     .checkbox-label {
       display: inline-flex;
@@ -132,78 +155,137 @@
       font-size: 11px;
       color: #666;
     }
+    .sus-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .sus-metrics div {
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: #f1f5f9;
+    }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="page">
     <h1>Rekap SUS</h1>
     <p class="subtitle">
-      Ringkasan jumlah pengisian form SUS oleh pembuat aplikasi dan daftar aplikasi yang belum mereka nilai.
+      Ringkasan jumlah pengisian form SUS, status penilaian tiap pembuat, dan skor SUS per aplikasi.
       <span id="last-update"></span>
     </p>
 
-    <div class="toolbar">
-      <input
-        id="search"
-        class="search-input"
-        type="text"
-        placeholder="Cari nama / NIM / aplikasi..."
-      />
-
-      <!-- FILTER APLIKASI -->
-      <select id="filter-app" class="select-input">
-        <option value="">Filter berdasarkan aplikasi yang belum dinilai...</option>
-      </select>
-
-      <label class="checkbox-label">
-        <input type="checkbox" id="only-pending" />
-        Tampilkan hanya yang masih punya aplikasi belum dinilai
-      </label>
+    <!-- TAB MENU -->
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-main">Rekap Aplikasi</button>
+      <button class="tab-btn" id="tab-sus">Detail SUS</button>
     </div>
 
-    <!-- TABEL UTAMA -->
-    <div class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nama</th>
-            <th>NIM</th>
-            <th>Aplikasi</th>
-            <th>Jumlah Isi</th>
-            <th>Jumlah Terisi</th> <!-- baru -->
-            <th>Status Penilaian</th>
-            <th>Belum Menilai Aplikasi</th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-          <tr>
-            <td colspan="8">Memuat data...</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- ========== SECTION 1: REKAP APLIKASI ========== -->
+    <div id="section-main">
+      <div class="toolbar">
+        <input
+          id="search"
+          class="search-input"
+          type="text"
+          placeholder="Cari nama / NIM / aplikasi..."
+        />
+
+        <select id="filter-app" class="select-input">
+          <option value="">Filter berdasarkan aplikasi yang belum dinilai...</option>
+        </select>
+
+        <label class="checkbox-label">
+          <input type="checkbox" id="only-pending" />
+          Tampilkan hanya yang masih punya aplikasi belum dinilai
+        </label>
+      </div>
+
+      <!-- TABEL UTAMA -->
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nama</th>
+              <th>NIM</th>
+              <th>Aplikasi</th>
+              <th>Jumlah Isi</th>
+              <th>Jumlah Terisi</th>
+              <th>Status Penilaian</th>
+              <th>Belum Menilai Aplikasi</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr>
+              <td colspan="8">Memuat data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TABEL NIM BERMASALAH -->
+      <h2>Responden dengan NIM tidak konsisten</h2>
+      <p class="small">
+        Daftar nama responden yang menggunakan lebih dari satu NIM berbeda ketika mengisi form SUS.
+      </p>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nama Responden</th>
+              <th>Detail NIM yang dipakai</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-nim">
+            <tr>
+              <td colspan="3">Memuat data NIM...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <!-- TABEL NIM BERMASALAH -->
-    <h2>Responden dengan NIM tidak konsisten</h2>
-    <p class="small">
-      Daftar nama responden yang menggunakan lebih dari satu NIM berbeda ketika mengisi form SUS.
-    </p>
-    <div class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nama Responden</th>
-            <th>Detail NIM yang dipakai</th>
-          </tr>
-        </thead>
-        <tbody id="tbody-nim">
-          <tr>
-            <td colspan="3">Memuat data NIM...</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- ========== SECTION 2: DETAIL SUS PER APLIKASI ========== -->
+    <div id="section-sus" class="hidden">
+      <h2>Detail SUS per Aplikasi</h2>
+      <p class="small">
+        Pilih aplikasi untuk melihat pemilik, rata-rata skor SUS, dan siapa saja yang mengisi beserta skornya.
+      </p>
+
+      <div class="toolbar">
+        <select id="sus-app-select" class="select-input">
+          <option value="">Pilih aplikasi...</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="sus-metrics" id="sus-metrics">
+          <!-- akan diisi via JS -->
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nama Responden</th>
+              <th>NIM</th>
+              <th>SUS Score</th>
+            </tr>
+          </thead>
+          <tbody id="sus-tbody">
+            <tr>
+              <td colspan="4">Pilih aplikasi untuk melihat daftar responden.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <p class="footer-note">
@@ -214,7 +296,9 @@
   <script>
     let globalData = [];
     let nimIssues = [];
+    let susData = [];
 
+    // ====== RENDER REKAP APLIKASI ======
     function renderTable() {
       const tbody = document.getElementById("tbody");
       const search = document.getElementById("search").value.toLowerCase().trim();
@@ -272,9 +356,7 @@
             ${
               pending
                 ? `<div class="apps-list">
-                     ${notFilled
-                       .map((app) => `<span>${app}</span>`)
-                       .join("")}
+                     ${notFilled.map((app) => `<span>${app}</span>`).join("")}
                    </div>`
                 : "-"
             }
@@ -312,18 +394,36 @@
       });
     }
 
+    // ====== FORMAT LAST-UPDATE DALAM WIB ======
     function setLastUpdate() {
       const el = document.getElementById("last-update");
-      try {
-        fetch("data.json?" + Date.now(), { method: "HEAD" })
-          .then((r) => {
-            const lm = r.headers.get("Last-Modified");
-            if (lm) {
-              el.textContent = " • Terakhir diperbarui: " + lm;
-            }
-          })
-          .catch(() => {});
-      } catch (e) {}
+
+      fetch("data.json?" + Date.now(), { method: "HEAD" })
+        .then((r) => {
+          const lm = r.headers.get("Last-Modified");
+          if (!lm) return;
+
+          // Last-Modified masih GMT
+          const dateGMT = new Date(lm);
+
+          // Konversi ke WIB (UTC+7)
+          const dateWIB = new Date(dateGMT.getTime() + 7 * 60 * 60 * 1000);
+
+          const bulanIndo = [
+            "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+          ];
+
+          const tgl = dateWIB.getDate();
+          const bln = bulanIndo[dateWIB.getMonth()];
+          const thn = dateWIB.getFullYear();
+
+          const jam = String(dateWIB.getHours()).padStart(2, "0");
+          const menit = String(dateWIB.getMinutes()).padStart(2, "0");
+
+          el.textContent = ` • Terakhir diperbarui: ${tgl} ${bln} ${thn} ${jam}:${menit} WIB`;
+        })
+        .catch(() => {});
     }
 
     function populateAppFilter() {
@@ -343,18 +443,110 @@
       });
     }
 
-    // Fetch data utama
+    // ====== RENDER DETAIL SUS ======
+    function populateSusAppSelect() {
+      const select = document.getElementById("sus-app-select");
+      if (!Array.isArray(susData) || susData.length === 0) {
+        select.innerHTML = `<option value="">Belum ada data SUS (sus_scores.json kosong).</option>`;
+        return;
+      }
+      const apps = susData
+        .map((d) => d.app)
+        .filter((v, i, arr) => v && arr.indexOf(v) === i)
+        .sort();
+
+      select.innerHTML = `<option value="">Pilih aplikasi...</option>`;
+      apps.forEach((app) => {
+        const opt = document.createElement("option");
+        opt.value = app;
+        opt.textContent = app;
+        select.appendChild(opt);
+      });
+    }
+
+    function renderSusDetail() {
+      const select = document.getElementById("sus-app-select");
+      const appName = select.value;
+      const tbody = document.getElementById("sus-tbody");
+      const metrics = document.getElementById("sus-metrics");
+
+      tbody.innerHTML = "";
+      metrics.innerHTML = "";
+
+      if (!appName) {
+        tbody.innerHTML = `<tr><td colspan="4">Pilih aplikasi untuk melihat daftar responden.</td></tr>`;
+        return;
+      }
+
+      const entry = susData.find((d) => d.app === appName);
+      if (!entry) {
+        tbody.innerHTML = `<tr><td colspan="4">Data SUS untuk aplikasi ini tidak ditemukan.</td></tr>`;
+        return;
+      }
+
+      const ownerName = entry.owner_name || "-";
+      const ownerNim = entry.owner_nim || "-";
+      const avg = entry.avg_sus != null ? entry.avg_sus.toFixed(1) : "-";
+      const count = entry.count ?? (entry.responses ? entry.responses.length : 0);
+
+      metrics.innerHTML = `
+        <div><strong>Aplikasi:</strong> ${entry.app}</div>
+        <div><strong>Pembuat:</strong> ${ownerName} (${ownerNim})</div>
+        <div><strong>Rata-rata SUS:</strong> ${avg}</div>
+        <div><strong>Jumlah responden:</strong> ${count}</div>
+      `;
+
+      const responses = entry.responses || [];
+      if (responses.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4">Belum ada respon SUS untuk aplikasi ini.</td></tr>`;
+        return;
+      }
+
+      responses.forEach((r, index) => {
+        const tr = document.createElement("tr");
+        const score = r.sus != null ? r.sus.toFixed(1) : "-";
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${r.respondent_name || "-"}</td>
+          <td>${r.respondent_nim || "-"}</td>
+          <td>${score}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ====== TAB SWITCHING ======
+    function switchTab(tab) {
+      const main = document.getElementById("section-main");
+      const sus = document.getElementById("section-sus");
+      const btnMain = document.getElementById("tab-main");
+      const btnSus = document.getElementById("tab-sus");
+
+      if (tab === "main") {
+        main.classList.remove("hidden");
+        sus.classList.add("hidden");
+        btnMain.classList.add("active");
+        btnSus.classList.remove("active");
+      } else {
+        main.classList.add("hidden");
+        sus.classList.remove("hidden");
+        btnMain.classList.remove("active");
+        btnSus.classList.add("active");
+      }
+    }
+
+    document.getElementById("tab-main").addEventListener("click", () => switchTab("main"));
+    document.getElementById("tab-sus").addEventListener("click", () => switchTab("sus"));
+
+    // ====== FETCH DATA ======
+    // data utama
     fetch("data.json?" + Date.now())
       .then((r) => {
-        if (!r.ok) {
-          throw new Error("Gagal fetch data.json: status " + r.status);
-        }
+        if (!r.ok) throw new Error("Gagal fetch data.json: status " + r.status);
         return r.json();
       })
       .then((data) => {
-        if (!Array.isArray(data)) {
-          throw new Error("Format data.json tidak sesuai (bukan array).");
-        }
+        if (!Array.isArray(data)) throw new Error("Format data.json tidak sesuai (bukan array).");
         globalData = data;
         populateAppFilter();
         renderTable();
@@ -366,12 +558,10 @@
         tbody.innerHTML = `<tr><td colspan="8">Error memuat data: ${err.message}</td></tr>`;
       });
 
-    // Fetch data NIM bermasalah
+    // nim_issues
     fetch("nim_issues.json?" + Date.now())
       .then((r) => {
-        if (!r.ok) {
-          throw new Error("nim_issues.json tidak ditemukan");
-        }
+        if (!r.ok) throw new Error("nim_issues.json tidak ditemukan");
         return r.json();
       })
       .then((data) => {
@@ -384,9 +574,27 @@
         tbody.innerHTML = `<tr><td colspan="3">Tidak ada data NIM bermasalah atau nim_issues.json belum dibuat.</td></tr>`;
       });
 
+    // sus_scores (untuk tab SUS)
+    fetch("sus_scores.json?" + Date.now())
+      .then((r) => {
+        if (!r.ok) throw new Error("sus_scores.json tidak ditemukan");
+        return r.json();
+      })
+      .then((data) => {
+        susData = Array.isArray(data) ? data : [];
+        populateSusAppSelect();
+      })
+      .catch((err) => {
+        console.warn(err.message);
+        const select = document.getElementById("sus-app-select");
+        select.innerHTML = `<option value="">sus_scores.json belum tersedia.</option>`;
+      });
+
+    // event listeners
     document.getElementById("search").addEventListener("input", renderTable);
     document.getElementById("only-pending").addEventListener("change", renderTable);
     document.getElementById("filter-app").addEventListener("change", renderTable);
+    document.getElementById("sus-app-select").addEventListener("change", renderSusDetail);
   </script>
 </body>
 </html>
