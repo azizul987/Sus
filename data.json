@@ -4,73 +4,20 @@
     "nim": "09021282429113",
     "app": "UNSRIverse",
     "filled": 14,
-    "not_filled_count": 13,
-    "not_filled_apps": [
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Book It!",
-        "creator_name": "Muhammad Wildan Aziz",
-        "creator_nim": "09021282429094"
-      },
-      {
-        "app": "Unsri Horor",
-        "creator_name": "Rama Alfira",
-        "creator_nim": "09021282429105"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "Unsri Horor",
+      "Chooskin",
+      "Rolla",
+      "YukSehat!",
+      "Duelist Exchange",
+      "Travel Unsri",
+      "Book It!",
+      "SkillSwap",
+      "TEMUNSRI",
+      "GOORDER",
+      "Nekodeals",
+      "LiterLens",
+      "E-Resep"
     ]
   },
   {
@@ -78,63 +25,18 @@
     "nim": "09021282429093",
     "app": "Travel Unsri",
     "filled": 16,
-    "not_filled_count": 11,
-    "not_filled_apps": [
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "MyWalid",
-        "creator_name": "M. Soni Juliansyah",
-        "creator_nim": "09021282429119"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "NgEvent",
-        "creator_name": "Rizki Ardiansyah",
-        "creator_nim": "09021282429114"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "Chooskin",
+      "Rolla",
+      "YukSehat!",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MatchMate",
+      "UNSRIverse",
+      "MyWalid",
+      "SkillSwap",
+      "LiterLens",
+      "NgEvent"
     ]
   },
   {
@@ -142,143 +44,34 @@
     "nim": "09021282429117",
     "app": "SkillSwap",
     "filled": 0,
-    "not_filled_count": 27,
-    "not_filled_apps": [
-      {
-        "app": "Salingisi",
-        "creator_name": "Helen Patricia",
-        "creator_nim": "09021282429104"
-      },
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "MyWalid",
-        "creator_name": "M. Soni Juliansyah",
-        "creator_nim": "09021282429119"
-      },
-      {
-        "app": "MenuBunda+",
-        "creator_name": "Carlos Ridwan Tampubolon",
-        "creator_nim": "09021282429087"
-      },
-      {
-        "app": "Mulo",
-        "creator_name": "Azizul Manal Gaumalanga",
-        "creator_nim": "09021282429092"
-      },
-      {
-        "app": "Defriend",
-        "creator_name": "Muhammad Fahrian",
-        "creator_nim": "09021282429111"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Let Him Cook",
-        "creator_name": "Muhammad Rofiudin",
-        "creator_nim": "09021282429115"
-      },
-      {
-        "app": "Book It!",
-        "creator_name": "Muhammad Wildan Aziz",
-        "creator_nim": "09021282429094"
-      },
-      {
-        "app": "Unsri Horor",
-        "creator_name": "Rama Alfira",
-        "creator_nim": "09021282429105"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "NgEvent",
-        "creator_name": "Rizki Ardiansyah",
-        "creator_nim": "09021282429114"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "Salingisi",
+      "Unsri Horor",
+      "TugasKu",
+      "Chooskin",
+      "Defriend",
+      "Rolla",
+      "YukSehat!",
+      "BUSRI",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MenuBunda+",
+      "MatchMate",
+      "Fasilink",
+      "UNSRIverse",
+      "Mulo",
+      "Travel Unsri",
+      "MyWalid",
+      "Let Him Cook",
+      "Book It!",
+      "Galon-BG",
+      "TEMUNSRI",
+      "GOORDER",
+      "Nekodeals",
+      "LiterLens",
+      "Go Produktif",
+      "E-Resep",
+      "NgEvent"
     ]
   },
   {
@@ -286,143 +79,34 @@
     "nim": "09021282429101",
     "app": "TugasKu",
     "filled": 0,
-    "not_filled_count": 27,
-    "not_filled_apps": [
-      {
-        "app": "Salingisi",
-        "creator_name": "Helen Patricia",
-        "creator_nim": "09021282429104"
-      },
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "MyWalid",
-        "creator_name": "M. Soni Juliansyah",
-        "creator_nim": "09021282429119"
-      },
-      {
-        "app": "MenuBunda+",
-        "creator_name": "Carlos Ridwan Tampubolon",
-        "creator_nim": "09021282429087"
-      },
-      {
-        "app": "Mulo",
-        "creator_name": "Azizul Manal Gaumalanga",
-        "creator_nim": "09021282429092"
-      },
-      {
-        "app": "Defriend",
-        "creator_name": "Muhammad Fahrian",
-        "creator_nim": "09021282429111"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Let Him Cook",
-        "creator_name": "Muhammad Rofiudin",
-        "creator_nim": "09021282429115"
-      },
-      {
-        "app": "Book It!",
-        "creator_name": "Muhammad Wildan Aziz",
-        "creator_nim": "09021282429094"
-      },
-      {
-        "app": "Unsri Horor",
-        "creator_name": "Rama Alfira",
-        "creator_nim": "09021282429105"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "NgEvent",
-        "creator_name": "Rizki Ardiansyah",
-        "creator_nim": "09021282429114"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "Salingisi",
+      "Unsri Horor",
+      "Chooskin",
+      "Defriend",
+      "Rolla",
+      "YukSehat!",
+      "BUSRI",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MenuBunda+",
+      "MatchMate",
+      "Fasilink",
+      "UNSRIverse",
+      "Mulo",
+      "Travel Unsri",
+      "MyWalid",
+      "Let Him Cook",
+      "Book It!",
+      "SkillSwap",
+      "Galon-BG",
+      "TEMUNSRI",
+      "GOORDER",
+      "Nekodeals",
+      "LiterLens",
+      "Go Produktif",
+      "E-Resep",
+      "NgEvent"
     ]
   },
   {
@@ -430,151 +114,41 @@
     "nim": "09021282429107",
     "app": "Go Produktif",
     "filled": 27,
-    "not_filled_count": 0,
-    "not_filled_apps": []
+    "not_filled": []
   },
   {
     "name": "Arkhan Syahputra",
     "nim": "09021282429106",
     "app": "MatchMate",
     "filled": 0,
-    "not_filled_count": 27,
-    "not_filled_apps": [
-      {
-        "app": "Salingisi",
-        "creator_name": "Helen Patricia",
-        "creator_nim": "09021282429104"
-      },
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "MyWalid",
-        "creator_name": "M. Soni Juliansyah",
-        "creator_nim": "09021282429119"
-      },
-      {
-        "app": "MenuBunda+",
-        "creator_name": "Carlos Ridwan Tampubolon",
-        "creator_nim": "09021282429087"
-      },
-      {
-        "app": "Mulo",
-        "creator_name": "Azizul Manal Gaumalanga",
-        "creator_nim": "09021282429092"
-      },
-      {
-        "app": "Defriend",
-        "creator_name": "Muhammad Fahrian",
-        "creator_nim": "09021282429111"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Let Him Cook",
-        "creator_name": "Muhammad Rofiudin",
-        "creator_nim": "09021282429115"
-      },
-      {
-        "app": "Book It!",
-        "creator_name": "Muhammad Wildan Aziz",
-        "creator_nim": "09021282429094"
-      },
-      {
-        "app": "Unsri Horor",
-        "creator_name": "Rama Alfira",
-        "creator_nim": "09021282429105"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "NgEvent",
-        "creator_name": "Rizki Ardiansyah",
-        "creator_nim": "09021282429114"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "Salingisi",
+      "Unsri Horor",
+      "TugasKu",
+      "Chooskin",
+      "Defriend",
+      "Rolla",
+      "YukSehat!",
+      "BUSRI",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MenuBunda+",
+      "Fasilink",
+      "UNSRIverse",
+      "Mulo",
+      "Travel Unsri",
+      "MyWalid",
+      "Let Him Cook",
+      "Book It!",
+      "SkillSwap",
+      "Galon-BG",
+      "TEMUNSRI",
+      "GOORDER",
+      "Nekodeals",
+      "LiterLens",
+      "Go Produktif",
+      "E-Resep",
+      "NgEvent"
     ]
   },
   {
@@ -582,21 +156,15 @@
     "nim": "09021282429088",
     "app": "Chooskin",
     "filled": 31,
-    "not_filled_count": 0,
-    "not_filled_apps": []
+    "not_filled": []
   },
   {
     "name": "Azizul Manal Gaumalanga",
     "nim": "09021282429092",
     "app": "Mulo",
     "filled": 31,
-    "not_filled_count": 1,
-    "not_filled_apps": [
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      }
+    "not_filled": [
+      "YukSehat!"
     ]
   },
   {
@@ -604,18 +172,9 @@
     "nim": "09021282429097",
     "app": "TEMUNSRI",
     "filled": 25,
-    "not_filled_count": 2,
-    "not_filled_apps": [
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      }
+    "not_filled": [
+      "TugasKu",
+      "GOORDER"
     ]
   },
   {
@@ -623,128 +182,31 @@
     "nim": "09021282429087",
     "app": "MenuBunda+",
     "filled": 3,
-    "not_filled_count": 24,
-    "not_filled_apps": [
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "MyWalid",
-        "creator_name": "M. Soni Juliansyah",
-        "creator_nim": "09021282429119"
-      },
-      {
-        "app": "Mulo",
-        "creator_name": "Azizul Manal Gaumalanga",
-        "creator_nim": "09021282429092"
-      },
-      {
-        "app": "Defriend",
-        "creator_name": "Muhammad Fahrian",
-        "creator_nim": "09021282429111"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Let Him Cook",
-        "creator_name": "Muhammad Rofiudin",
-        "creator_nim": "09021282429115"
-      },
-      {
-        "app": "Unsri Horor",
-        "creator_name": "Rama Alfira",
-        "creator_nim": "09021282429105"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "NgEvent",
-        "creator_name": "Rizki Ardiansyah",
-        "creator_nim": "09021282429114"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "Unsri Horor",
+      "TugasKu",
+      "Chooskin",
+      "Defriend",
+      "Rolla",
+      "BUSRI",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MatchMate",
+      "Fasilink",
+      "UNSRIverse",
+      "Mulo",
+      "Travel Unsri",
+      "MyWalid",
+      "Let Him Cook",
+      "SkillSwap",
+      "Galon-BG",
+      "TEMUNSRI",
+      "GOORDER",
+      "Nekodeals",
+      "LiterLens",
+      "Go Produktif",
+      "E-Resep",
+      "NgEvent"
     ]
   },
   {
@@ -752,73 +214,20 @@
     "nim": "09021282429091",
     "app": "Nekodeals",
     "filled": 14,
-    "not_filled_count": 13,
-    "not_filled_apps": [
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "Mulo",
-        "creator_name": "Azizul Manal Gaumalanga",
-        "creator_nim": "09021282429092"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "Book It!",
-        "creator_name": "Muhammad Wildan Aziz",
-        "creator_nim": "09021282429094"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "TugasKu",
+      "Chooskin",
+      "Rolla",
+      "Jasa-kuy",
+      "UNSRIverse",
+      "Mulo",
+      "Travel Unsri",
+      "Book It!",
+      "SkillSwap",
+      "Galon-BG",
+      "TEMUNSRI",
+      "GOORDER",
+      "Go Produktif"
     ]
   },
   {
@@ -826,73 +235,20 @@
     "nim": "09021282429112",
     "app": "Galon-BG",
     "filled": 14,
-    "not_filled_count": 13,
-    "not_filled_apps": [
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "MenuBunda+",
-        "creator_name": "Carlos Ridwan Tampubolon",
-        "creator_nim": "09021282429087"
-      },
-      {
-        "app": "Defriend",
-        "creator_name": "Muhammad Fahrian",
-        "creator_nim": "09021282429111"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "Book It!",
-        "creator_name": "Muhammad Wildan Aziz",
-        "creator_nim": "09021282429094"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "TugasKu",
+      "Chooskin",
+      "Defriend",
+      "YukSehat!",
+      "BUSRI",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MenuBunda+",
+      "MatchMate",
+      "Book It!",
+      "GOORDER",
+      "Nekodeals",
+      "Go Produktif"
     ]
   },
   {
@@ -900,21 +256,15 @@
     "nim": "09021282429104",
     "app": "Salingisi",
     "filled": 27,
-    "not_filled_count": 0,
-    "not_filled_apps": []
+    "not_filled": []
   },
   {
     "name": "M. Irfan Nopriansyah",
     "nim": "09021282429108",
     "app": "Duelist Exchange",
     "filled": 26,
-    "not_filled_count": 1,
-    "not_filled_apps": [
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      }
+    "not_filled": [
+      "LiterLens"
     ]
   },
   {
@@ -922,98 +272,25 @@
     "nim": "09021282429119",
     "app": "MyWalid",
     "filled": 9,
-    "not_filled_count": 18,
-    "not_filled_apps": [
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "Mulo",
-        "creator_name": "Azizul Manal Gaumalanga",
-        "creator_nim": "09021282429092"
-      },
-      {
-        "app": "Defriend",
-        "creator_name": "Muhammad Fahrian",
-        "creator_nim": "09021282429111"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "Book It!",
-        "creator_name": "Muhammad Wildan Aziz",
-        "creator_nim": "09021282429094"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "TugasKu",
+      "Chooskin",
+      "Defriend",
+      "Rolla",
+      "BUSRI",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MatchMate",
+      "Fasilink",
+      "UNSRIverse",
+      "Mulo",
+      "Travel Unsri",
+      "Book It!",
+      "SkillSwap",
+      "Galon-BG",
+      "GOORDER",
+      "Nekodeals",
+      "Go Produktif"
     ]
   },
   {
@@ -1021,143 +298,34 @@
     "nim": "09021282429120",
     "app": "Fasilink",
     "filled": 0,
-    "not_filled_count": 27,
-    "not_filled_apps": [
-      {
-        "app": "Salingisi",
-        "creator_name": "Helen Patricia",
-        "creator_nim": "09021282429104"
-      },
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "MyWalid",
-        "creator_name": "M. Soni Juliansyah",
-        "creator_nim": "09021282429119"
-      },
-      {
-        "app": "MenuBunda+",
-        "creator_name": "Carlos Ridwan Tampubolon",
-        "creator_nim": "09021282429087"
-      },
-      {
-        "app": "Mulo",
-        "creator_name": "Azizul Manal Gaumalanga",
-        "creator_nim": "09021282429092"
-      },
-      {
-        "app": "Defriend",
-        "creator_name": "Muhammad Fahrian",
-        "creator_nim": "09021282429111"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Let Him Cook",
-        "creator_name": "Muhammad Rofiudin",
-        "creator_nim": "09021282429115"
-      },
-      {
-        "app": "Book It!",
-        "creator_name": "Muhammad Wildan Aziz",
-        "creator_nim": "09021282429094"
-      },
-      {
-        "app": "Unsri Horor",
-        "creator_name": "Rama Alfira",
-        "creator_nim": "09021282429105"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "NgEvent",
-        "creator_name": "Rizki Ardiansyah",
-        "creator_nim": "09021282429114"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "Salingisi",
+      "Unsri Horor",
+      "TugasKu",
+      "Chooskin",
+      "Defriend",
+      "Rolla",
+      "YukSehat!",
+      "BUSRI",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MenuBunda+",
+      "MatchMate",
+      "UNSRIverse",
+      "Mulo",
+      "Travel Unsri",
+      "MyWalid",
+      "Let Him Cook",
+      "Book It!",
+      "SkillSwap",
+      "Galon-BG",
+      "TEMUNSRI",
+      "GOORDER",
+      "Nekodeals",
+      "LiterLens",
+      "Go Produktif",
+      "E-Resep",
+      "NgEvent"
     ]
   },
   {
@@ -1165,113 +333,28 @@
     "nim": "09021282429089",
     "app": "BUSRI",
     "filled": 6,
-    "not_filled_count": 21,
-    "not_filled_apps": [
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "MyWalid",
-        "creator_name": "M. Soni Juliansyah",
-        "creator_nim": "09021282429119"
-      },
-      {
-        "app": "MenuBunda+",
-        "creator_name": "Carlos Ridwan Tampubolon",
-        "creator_nim": "09021282429087"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Let Him Cook",
-        "creator_name": "Muhammad Rofiudin",
-        "creator_nim": "09021282429115"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "NgEvent",
-        "creator_name": "Rizki Ardiansyah",
-        "creator_nim": "09021282429114"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "TugasKu",
+      "Chooskin",
+      "Rolla",
+      "YukSehat!",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MenuBunda+",
+      "Fasilink",
+      "UNSRIverse",
+      "Travel Unsri",
+      "MyWalid",
+      "Let Him Cook",
+      "SkillSwap",
+      "Galon-BG",
+      "TEMUNSRI",
+      "GOORDER",
+      "Nekodeals",
+      "LiterLens",
+      "Go Produktif",
+      "E-Resep",
+      "NgEvent"
     ]
   },
   {
@@ -1279,143 +362,34 @@
     "nim": "09021282429111",
     "app": "Defriend",
     "filled": 0,
-    "not_filled_count": 27,
-    "not_filled_apps": [
-      {
-        "app": "Salingisi",
-        "creator_name": "Helen Patricia",
-        "creator_nim": "09021282429104"
-      },
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "MyWalid",
-        "creator_name": "M. Soni Juliansyah",
-        "creator_nim": "09021282429119"
-      },
-      {
-        "app": "MenuBunda+",
-        "creator_name": "Carlos Ridwan Tampubolon",
-        "creator_nim": "09021282429087"
-      },
-      {
-        "app": "Mulo",
-        "creator_name": "Azizul Manal Gaumalanga",
-        "creator_nim": "09021282429092"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Let Him Cook",
-        "creator_name": "Muhammad Rofiudin",
-        "creator_nim": "09021282429115"
-      },
-      {
-        "app": "Book It!",
-        "creator_name": "Muhammad Wildan Aziz",
-        "creator_nim": "09021282429094"
-      },
-      {
-        "app": "Unsri Horor",
-        "creator_name": "Rama Alfira",
-        "creator_nim": "09021282429105"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "NgEvent",
-        "creator_name": "Rizki Ardiansyah",
-        "creator_nim": "09021282429114"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "Salingisi",
+      "Unsri Horor",
+      "TugasKu",
+      "Chooskin",
+      "Rolla",
+      "YukSehat!",
+      "BUSRI",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MenuBunda+",
+      "MatchMate",
+      "Fasilink",
+      "UNSRIverse",
+      "Mulo",
+      "Travel Unsri",
+      "MyWalid",
+      "Let Him Cook",
+      "Book It!",
+      "SkillSwap",
+      "Galon-BG",
+      "TEMUNSRI",
+      "GOORDER",
+      "Nekodeals",
+      "LiterLens",
+      "Go Produktif",
+      "E-Resep",
+      "NgEvent"
     ]
   },
   {
@@ -1423,23 +397,10 @@
     "nim": "09021382429128",
     "app": "Jasa-kuy",
     "filled": 26,
-    "not_filled_count": 3,
-    "not_filled_apps": [
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "Unsri Horor",
-        "creator_name": "Rama Alfira",
-        "creator_nim": "09021282429105"
-      }
+    "not_filled": [
+      "Unsri Horor",
+      "Fasilink",
+      "Nekodeals"
     ]
   },
   {
@@ -1447,151 +408,41 @@
     "nim": "09021282429086",
     "app": "YukSehat!",
     "filled": 31,
-    "not_filled_count": 0,
-    "not_filled_apps": []
+    "not_filled": []
   },
   {
     "name": "Muhammad Rofiudin",
     "nim": "09021282429115",
     "app": "Let Him Cook",
     "filled": 0,
-    "not_filled_count": 27,
-    "not_filled_apps": [
-      {
-        "app": "Salingisi",
-        "creator_name": "Helen Patricia",
-        "creator_nim": "09021282429104"
-      },
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "MyWalid",
-        "creator_name": "M. Soni Juliansyah",
-        "creator_nim": "09021282429119"
-      },
-      {
-        "app": "MenuBunda+",
-        "creator_name": "Carlos Ridwan Tampubolon",
-        "creator_nim": "09021282429087"
-      },
-      {
-        "app": "Mulo",
-        "creator_name": "Azizul Manal Gaumalanga",
-        "creator_nim": "09021282429092"
-      },
-      {
-        "app": "Defriend",
-        "creator_name": "Muhammad Fahrian",
-        "creator_nim": "09021282429111"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Book It!",
-        "creator_name": "Muhammad Wildan Aziz",
-        "creator_nim": "09021282429094"
-      },
-      {
-        "app": "Unsri Horor",
-        "creator_name": "Rama Alfira",
-        "creator_nim": "09021282429105"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "NgEvent",
-        "creator_name": "Rizki Ardiansyah",
-        "creator_nim": "09021282429114"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "Salingisi",
+      "Unsri Horor",
+      "TugasKu",
+      "Chooskin",
+      "Defriend",
+      "Rolla",
+      "YukSehat!",
+      "BUSRI",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MenuBunda+",
+      "MatchMate",
+      "Fasilink",
+      "UNSRIverse",
+      "Mulo",
+      "Travel Unsri",
+      "MyWalid",
+      "Book It!",
+      "SkillSwap",
+      "Galon-BG",
+      "TEMUNSRI",
+      "GOORDER",
+      "Nekodeals",
+      "LiterLens",
+      "Go Produktif",
+      "E-Resep",
+      "NgEvent"
     ]
   },
   {
@@ -1599,136 +450,38 @@
     "nim": "09021282429094",
     "app": "Book It!",
     "filled": 31,
-    "not_filled_count": 0,
-    "not_filled_apps": []
+    "not_filled": []
   },
   {
     "name": "Muhammad Zaif Daffarian",
     "nim": "09021282429118",
     "app": "GOORDER",
     "filled": 3,
-    "not_filled_count": 24,
-    "not_filled_apps": [
-      {
-        "app": "Nekodeals",
-        "creator_name": "Dea Amalia Rombon",
-        "creator_nim": "09021282429091"
-      },
-      {
-        "app": "SkillSwap",
-        "creator_name": "Anugerah Prima Alam Dwi Putra H",
-        "creator_nim": "09021282429117"
-      },
-      {
-        "app": "MyWalid",
-        "creator_name": "M. Soni Juliansyah",
-        "creator_nim": "09021282429119"
-      },
-      {
-        "app": "MenuBunda+",
-        "creator_name": "Carlos Ridwan Tampubolon",
-        "creator_nim": "09021282429087"
-      },
-      {
-        "app": "Mulo",
-        "creator_name": "Azizul Manal Gaumalanga",
-        "creator_nim": "09021282429092"
-      },
-      {
-        "app": "Defriend",
-        "creator_name": "Muhammad Fahrian",
-        "creator_nim": "09021282429111"
-      },
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "Rolla",
-        "creator_name": "Stevanus Parise Jona Sitorus",
-        "creator_nim": "09021282429109"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Let Him Cook",
-        "creator_name": "Muhammad Rofiudin",
-        "creator_nim": "09021282429115"
-      },
-      {
-        "app": "Unsri Horor",
-        "creator_name": "Rama Alfira",
-        "creator_nim": "09021282429105"
-      },
-      {
-        "app": "Galon-BG",
-        "creator_name": "Fathir Alif",
-        "creator_nim": "09021282429112"
-      },
-      {
-        "app": "Go Produktif",
-        "creator_name": "Arif Dwi Febrianto",
-        "creator_nim": "09021282429107"
-      },
-      {
-        "app": "UNSRIverse",
-        "creator_name": "Adiel Zinio Putra Saragih",
-        "creator_nim": "09021282429113"
-      },
-      {
-        "app": "Travel Unsri",
-        "creator_name": "Amirul Nur Cahyo",
-        "creator_nim": "09021282429093"
-      },
-      {
-        "app": "Chooskin",
-        "creator_name": "Axkeisha azura alwaqar",
-        "creator_nim": "09021282429088"
-      }
+    "not_filled": [
+      "Unsri Horor",
+      "TugasKu",
+      "Chooskin",
+      "Defriend",
+      "Rolla",
+      "YukSehat!",
+      "BUSRI",
+      "Jasa-kuy",
+      "Duelist Exchange",
+      "MenuBunda+",
+      "MatchMate",
+      "Fasilink",
+      "UNSRIverse",
+      "Mulo",
+      "Travel Unsri",
+      "MyWalid",
+      "Let Him Cook",
+      "SkillSwap",
+      "Galon-BG",
+      "TEMUNSRI",
+      "Nekodeals",
+      "LiterLens",
+      "Go Produktif",
+      "E-Resep"
     ]
   },
   {
@@ -1736,13 +489,8 @@
     "nim": "09021282429105",
     "app": "Unsri Horor",
     "filled": 27,
-    "not_filled_count": 1,
-    "not_filled_apps": [
-      {
-        "app": "Jasa-kuy",
-        "creator_name": "Muhammad Ghaza Algifahri",
-        "creator_nim": "09021382429128"
-      }
+    "not_filled": [
+      "Jasa-kuy"
     ]
   },
   {
@@ -1750,18 +498,9 @@
     "nim": "09021282429114",
     "app": "NgEvent",
     "filled": 25,
-    "not_filled_count": 2,
-    "not_filled_apps": [
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "GOORDER",
-        "creator_name": "Muhammad Zaif Daffarian",
-        "creator_nim": "09021282429118"
-      }
+    "not_filled": [
+      "Fasilink",
+      "GOORDER"
     ]
   },
   {
@@ -1769,73 +508,20 @@
     "nim": "09021282429109",
     "app": "Rolla",
     "filled": 14,
-    "not_filled_count": 13,
-    "not_filled_apps": [
-      {
-        "app": "MenuBunda+",
-        "creator_name": "Carlos Ridwan Tampubolon",
-        "creator_nim": "09021282429087"
-      },
-      {
-        "app": "Defriend",
-        "creator_name": "Muhammad Fahrian",
-        "creator_nim": "09021282429111"
-      },
-      {
-        "app": "LiterLens",
-        "creator_name": "Wahyu Pratama",
-        "creator_nim": "09021282429084"
-      },
-      {
-        "app": "YukSehat!",
-        "creator_name": "Muhammad Iqbal Kurniawan",
-        "creator_nim": "09021282429086"
-      },
-      {
-        "app": "Fasilink",
-        "creator_name": "Malisah Nadya Marbini",
-        "creator_nim": "09021282429120"
-      },
-      {
-        "app": "TEMUNSRI",
-        "creator_name": "CAREENA PUTRI",
-        "creator_nim": "09021282429097"
-      },
-      {
-        "app": "Duelist Exchange",
-        "creator_name": "M. Irfan Nopriansyah",
-        "creator_nim": "09021282429108"
-      },
-      {
-        "app": "TugasKu",
-        "creator_name": "Ari Vernanado",
-        "creator_nim": "09021282429101"
-      },
-      {
-        "app": "BUSRI",
-        "creator_name": "Muhammad Adha",
-        "creator_nim": "09021282429089"
-      },
-      {
-        "app": "MatchMate",
-        "creator_name": "Arkhan Syahputra",
-        "creator_nim": "09021282429106"
-      },
-      {
-        "app": "E-Resep",
-        "creator_name": "Zaki Yamani Quthub",
-        "creator_nim": "09021282429096"
-      },
-      {
-        "app": "Let Him Cook",
-        "creator_name": "Muhammad Rofiudin",
-        "creator_nim": "09021282429115"
-      },
-      {
-        "app": "NgEvent",
-        "creator_name": "Rizki Ardiansyah",
-        "creator_nim": "09021282429114"
-      }
+    "not_filled": [
+      "TugasKu",
+      "Defriend",
+      "YukSehat!",
+      "BUSRI",
+      "Duelist Exchange",
+      "MenuBunda+",
+      "MatchMate",
+      "Fasilink",
+      "Let Him Cook",
+      "TEMUNSRI",
+      "LiterLens",
+      "E-Resep",
+      "NgEvent"
     ]
   },
   {
@@ -1843,15 +529,13 @@
     "nim": "09021282429084",
     "app": "LiterLens",
     "filled": 27,
-    "not_filled_count": 0,
-    "not_filled_apps": []
+    "not_filled": []
   },
   {
     "name": "Zaki Yamani Quthub",
     "nim": "09021282429096",
     "app": "E-Resep",
     "filled": 30,
-    "not_filled_count": 0,
-    "not_filled_apps": []
+    "not_filled": []
   }
 ]
