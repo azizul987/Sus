@@ -1,42 +1,272 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Rekap SUS</title>
-  </head>
-  <body>
-    <h2>Rekap SUS</h2>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rekap SUS</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f6fa;
+      color: #222;
+    }
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 24px;
+    }
+    .subtitle {
+      margin: 0 0 20px;
+      color: #666;
+      font-size: 13px;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .search-input {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      min-width: 220px;
+      font-size: 13px;
+    }
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+      padding: 16px 16px 8px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 13px;
+    }
+    thead {
+      background: #f1f5f9;
+    }
+    th, td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    tbody tr:nth-child(even) {
+      background: #f8fafc;
+    }
+    tbody tr:hover {
+      background: #e2f3ff;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-ok {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #22c55e;
+    }
+    .badge-warn {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #facc15;
+    }
+    .apps-list {
+      font-size: 11px;
+      color: #444;
+    }
+    .apps-list span {
+      display: inline-block;
+      margin-right: 6px;
+      margin-bottom: 2px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #e5e7eb;
+    }
+    .footer-note {
+      margin-top: 16px;
+      font-size: 11px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Rekap SUS</h1>
+    <p class="subtitle">
+      Ringkasan jumlah pengisian form SUS oleh pembuat aplikasi dan daftar aplikasi yang belum mereka nilai.
+      <span id="last-update"></span>
+    </p>
 
-    <table border="1" cellpadding="6">
-      <thead>
-        <tr>
-          <th>Nama</th>
-          <th>NIM</th>
-          <th>Aplikasi</th>
-          <th>Jumlah Isi</th>
-          <th>Belum Menilai</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
+    <div class="toolbar">
+      <input
+        id="search"
+        class="search-input"
+        type="text"
+        placeholder="Cari nama / NIM / aplikasi..."
+      />
+      <label class="checkbox-label">
+        <input type="checkbox" id="only-pending" />
+        Tampilkan hanya yang masih punya aplikasi belum dinilai
+      </label>
+    </div>
 
-    <script>
-      fetch("data.json")
-        .then((r) => r.json())
-        .then((data) => {
-          const tbody = document.getElementById("tbody");
-          data.forEach((d) => {
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-        <td>${d.name}</td>
-        <td>${d.nim}</td>
-        <td>${d.app}</td>
-        <td>${d.filled}</td>
-        <td>${d.not_filled.join(", ")}</td>
-      `;
-            tbody.appendChild(tr);
-          });
-        });
-    </script>
-  </body>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nama</th>
+            <th>NIM</th>
+            <th>Aplikasi</th>
+            <th>Jumlah Isi</th>
+            <th>Status Penilaian</th>
+            <th>Belum Menilai Aplikasi</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr>
+            <td colspan="7">Memuat data...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="footer-note">
+      Data diambil dari Google Spreadsheet dan diperbarui otomatis oleh GitHub Actions.
+    </p>
+  </div>
+
+  <script>
+    let globalData = [];
+
+    function renderTable() {
+      const tbody = document.getElementById("tbody");
+      const search = document.getElementById("search").value.toLowerCase().trim();
+      const onlyPending = document.getElementById("only-pending").checked;
+
+      tbody.innerHTML = "";
+
+      const filtered = globalData.filter((d) => {
+        const text =
+          (d.name || "") +
+          " " +
+          (d.nim || "") +
+          " " +
+          (d.app || "");
+        const matchesSearch = text.toLowerCase().includes(search);
+        const pending = (d.not_filled || []).length > 0;
+        const matchesPending = !onlyPending || pending;
+        return matchesSearch && matchesPending;
+      });
+
+      if (filtered.length === 0) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td colspan="7">Tidak ada data untuk filter saat ini.</td>`;
+        tbody.appendChild(tr);
+        return;
+      }
+
+      filtered.forEach((d, index) => {
+        const notFilled = d.not_filled || [];
+        const pending = notFilled.length > 0;
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${d.name || "-"}</td>
+          <td>${d.nim || "-"}</td>
+          <td>${d.app || "-"}</td>
+          <td>${d.filled ?? 0}</td>
+          <td>
+            ${
+              pending
+                ? `<span class="badge badge-warn">${notFilled.length} aplikasi belum dinilai</span>`
+                : `<span class="badge badge-ok">Sudah menilai semua</span>`
+            }
+          </td>
+          <td>
+            ${
+              pending
+                ? `<div class="apps-list">
+                     ${notFilled
+                       .map((app) => `<span>${app}</span>`)
+                       .join("")}
+                   </div>`
+                : "-"
+            }
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function setLastUpdate() {
+      const el = document.getElementById("last-update");
+      try {
+        // pakai Last-Modified dari response kalau ada
+        fetch("data.json?" + Date.now(), { method: "HEAD" })
+          .then((r) => {
+            const lm = r.headers.get("Last-Modified");
+            if (lm) {
+              el.textContent = " • Terakhir diperbarui: " + lm;
+            }
+          })
+          .catch(() => {});
+      } catch (e) {}
+    }
+
+    fetch("data.json?" + Date.now())
+      .then((r) => {
+        if (!r.ok) {
+          throw new Error("Gagal fetch data.json: status " + r.status);
+        }
+        return r.json();
+      })
+      .then((data) => {
+        if (!Array.isArray(data)) {
+          throw new Error("Format data.json tidak sesuai (bukan array).");
+        }
+        globalData = data;
+        renderTable();
+        setLastUpdate();
+      })
+      .catch((err) => {
+        console.error(err);
+        const tbody = document.getElementById("tbody");
+        tbody.innerHTML = `<tr><td colspan="7">Error memuat data: ${err.message}</td></tr>`;
+      });
+
+    document.getElementById("search").addEventListener("input", renderTable);
+    document.getElementById("only-pending").addEventListener("change", renderTable);
+  </script>
+</body>
 </html>
