@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rekap SUS</title>
+  </head>
+  <body>
+    <h2>Rekap SUS</h2>
+
+    <table border="1" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>NIM</th>
+          <th>Aplikasi</th>
+          <th>Jumlah Isi</th>
+          <th>Belum Menilai</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <script>
+      fetch("data.json")
+        .then((r) => r.json())
+        .then((data) => {
+          const tbody = document.getElementById("tbody");
+          data.forEach((d) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+        <td>${d.name}</td>
+        <td>${d.nim}</td>
+        <td>${d.app}</td>
+        <td>${d.filled}</td>
+        <td>${d.not_filled.join(", ")}</td>
+      `;
+            tbody.appendChild(tr);
+          });
+        });
+    </script>
+  </body>
+</html>
