@@ -34,7 +34,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # sinkron dulu dengan remote (kalau kamu ada commit baru)
+          # sinkron dulu dengan remote
           git pull --rebase origin main || true
 
           if [[ `git status --porcelain` ]]; then

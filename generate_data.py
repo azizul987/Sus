@@ -106,7 +106,6 @@ print(f"Jumlah pembuat aplikasi unik (berdasarkan NIM): {len(all_creators)}")
 # ===============================
 # 5. Hitung jumlah pengisi tiap aplikasi
 # ===============================
-# Berapa banyak baris db yang memilih aplikasi (full string)
 app_full_count_map = apps_col.value_counts().to_dict()
 
 # ===============================
@@ -160,9 +159,9 @@ for creator in all_creators:
         "name": owner_name,
         "nim": creator["nim"],
         "app": owner_app,
-        "filled": filled_count,            # dia mengisi form berapa kali
-        "app_filled_count": app_filled_count,  # aplikasinya diisi berapa kali
-        "not_filled": not_filled_list
+        "filled": filled_count,               # dia mengisi form berapa kali
+        "app_filled_count": app_filled_count, # aplikasinya diisi berapa kali
+        "not_filled": not_filled_list,
     })
 
 result = sorted(result, key=lambda x: x["name"].lower())
@@ -175,14 +174,17 @@ nim_issues = []
 grouped = db.groupby("Nama Responden (Participant)")
 
 for name, sub in grouped:
-    unique_nims = sorted({normalize_nim(n) for n in sub["NIM_norm"].unique() if normalize_nim(n)})
+    unique_nims = sorted({
+        normalize_nim(n) for n in sub["NIM_norm"].unique()
+        if normalize_nim(n)
+    })
     if len(unique_nims) > 1:
         counts = sub.groupby("NIM_norm").size().to_dict()
         nim_issues.append({
             "name": str(name).strip(),
             "nims": unique_nims,
-            "nim_counts": counts,
-            "total_rows": int(sub.shape[0])
+            "nim_counts": {normalize_nim(k): int(v) for k, v in counts.items()},
+            "total_rows": int(sub.shape[0]),
         })
 
 nim_issues = sorted(nim_issues, key=lambda x: x["name"].lower())
@@ -190,12 +192,16 @@ print(f"Jumlah nama dengan NIM tidak konsisten: {len(nim_issues)}")
 
 # ===============================
 # 8. sus_scores.json
-#    SUS per aplikasi + daftar responden
+#    SUS per aplikasi + daftar responden (detail Q1–Q10)
 # ===============================
 sus_scores = []
 
+# nama kolom item SUS di Excel, sesuaikan jika beda
+SUS_COLS = [f"Q{i}" for i in range(1, 11)]
+
 if "Jumlah" in db.columns:
     print("Menghitung SUS score per aplikasi...")
+
     sus_map = {}
 
     for _, row in db.iterrows():
@@ -206,7 +212,7 @@ if "Jumlah" in db.columns:
         app_name, owner_nim_raw, owner_name = parse_app_full(app_full)
         owner_nim_norm = normalize_nim(owner_nim_raw)
 
-        # SUS raw (0–40) lalu dikali 2.5 -> 0–100
+        # Jumlah (0–40)
         try:
             raw = float(row["Jumlah"])
         except Exception:
@@ -215,10 +221,24 @@ if "Jumlah" in db.columns:
         if pd.isna(raw):
             continue
 
+        # SUS 0–100
         sus_value = raw * 2.5
 
         respondent_name = str(row["Nama Responden (Participant)"]).strip()
         respondent_nim = normalize_nim(row["NIM"])
+
+        # ambil nilai Q1–Q10
+        q_values = {}
+        for i, col in enumerate(SUS_COLS, start=1):
+            if col in db.columns:
+                val = row[col]
+                try:
+                    if pd.isna(val):
+                        q_values[f"q{i}"] = None
+                    else:
+                        q_values[f"q{i}"] = float(val)
+                except Exception:
+                    q_values[f"q{i}"] = str(val)
 
         key = (app_name, owner_nim_norm, owner_name)
         if key not in sus_map:
@@ -227,14 +247,16 @@ if "Jumlah" in db.columns:
                 "owner_name": owner_name,
                 "owner_nim": owner_nim_norm,
                 "scores": [],
-                "responses": []
+                "responses": [],
             }
 
         sus_map[key]["scores"].append(sus_value)
         sus_map[key]["responses"].append({
             "respondent_name": respondent_name,
             "respondent_nim": respondent_nim,
-            "sus": sus_value
+            "sus": sus_value,
+            "jumlah": raw,
+            **q_values,
         })
 
     for key, entry in sus_map.items():
@@ -248,7 +270,7 @@ if "Jumlah" in db.columns:
             "owner_nim": entry["owner_nim"],
             "avg_sus": avg_sus,
             "count": len(scores),
-            "responses": entry["responses"]
+            "responses": entry["responses"],
         })
 
     sus_scores = sorted(sus_scores, key=lambda x: x["app"].lower())

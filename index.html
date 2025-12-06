@@ -256,7 +256,7 @@
     <div id="section-sus" class="hidden">
       <h2>Detail SUS per Aplikasi</h2>
       <p class="small">
-        Pilih aplikasi untuk melihat pemilik, rata-rata skor SUS, dan siapa saja yang mengisi beserta skornya.
+        Pilih aplikasi untuk melihat pemilik, rata-rata skor SUS, dan siapa saja yang mengisi beserta detail jawabannya.
       </p>
 
       <div class="toolbar">
@@ -276,12 +276,23 @@
               <th>#</th>
               <th>Nama Responden</th>
               <th>NIM</th>
+              <th>Q1</th>
+              <th>Q2</th>
+              <th>Q3</th>
+              <th>Q4</th>
+              <th>Q5</th>
+              <th>Q6</th>
+              <th>Q7</th>
+              <th>Q8</th>
+              <th>Q9</th>
+              <th>Q10</th>
+              <th>Jumlah</th>
               <th>SUS Score</th>
             </tr>
           </thead>
           <tbody id="sus-tbody">
             <tr>
-              <td colspan="4">Pilih aplikasi untuk melihat daftar responden.</td>
+              <td colspan="15">Pilih aplikasi untuk melihat daftar responden.</td>
             </tr>
           </tbody>
         </table>
@@ -403,10 +414,7 @@
           const lm = r.headers.get("Last-Modified");
           if (!lm) return;
 
-          // Last-Modified masih GMT
           const dateGMT = new Date(lm);
-
-          // Konversi ke WIB (UTC+7)
           const dateWIB = new Date(dateGMT.getTime() + 7 * 60 * 60 * 1000);
 
           const bulanIndo = [
@@ -474,13 +482,13 @@
       metrics.innerHTML = "";
 
       if (!appName) {
-        tbody.innerHTML = `<tr><td colspan="4">Pilih aplikasi untuk melihat daftar responden.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="15">Pilih aplikasi untuk melihat daftar responden.</td></tr>`;
         return;
       }
 
       const entry = susData.find((d) => d.app === appName);
       if (!entry) {
-        tbody.innerHTML = `<tr><td colspan="4">Data SUS untuk aplikasi ini tidak ditemukan.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="15">Data SUS untuk aplikasi ini tidak ditemukan.</td></tr>`;
         return;
       }
 
@@ -498,17 +506,30 @@
 
       const responses = entry.responses || [];
       if (responses.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4">Belum ada respon SUS untuk aplikasi ini.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="15">Belum ada respon SUS untuk aplikasi ini.</td></tr>`;
         return;
       }
 
       responses.forEach((r, index) => {
-        const tr = document.createElement("tr");
         const score = r.sus != null ? r.sus.toFixed(1) : "-";
+        const jumlah = r.jumlah != null ? r.jumlah : "-";
+
+        const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${index + 1}</td>
           <td>${r.respondent_name || "-"}</td>
           <td>${r.respondent_nim || "-"}</td>
+          <td>${r.q1 ?? "-"}</td>
+          <td>${r.q2 ?? "-"}</td>
+          <td>${r.q3 ?? "-"}</td>
+          <td>${r.q4 ?? "-"}</td>
+          <td>${r.q5 ?? "-"}</td>
+          <td>${r.q6 ?? "-"}</td>
+          <td>${r.q7 ?? "-"}</td>
+          <td>${r.q8 ?? "-"}</td>
+          <td>${r.q9 ?? "-"}</td>
+          <td>${r.q10 ?? "-"}</td>
+          <td>${jumlah}</td>
           <td>${score}</td>
         `;
         tbody.appendChild(tr);
