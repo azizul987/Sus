@@ -1,54 +1,54 @@
-name: Update SUS Data
+# name: Update SUS Data
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: "*/3 * * * *" # jalan tiap 3 menit (UTC)
+# on:
+#   workflow_dispatch:
+#   schedule:
+#     - cron: "*/3 * * * *" # jalan tiap 3 menit (UTC)
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+#       - name: Setup Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
 
-      - name: Install dependencies
-        run: |
-          pip install pandas openpyxl requests
+#       - name: Install dependencies
+#         run: |
+#           pip install pandas openpyxl requests
 
-      - name: Generate data
-        run: python generate_data.py
+#       - name: Generate data
+#         run: python generate_data.py
 
-      - name: Commit results
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+#       - name: Commit results
+#         run: |
+#           git config user.name "github-actions[bot]"
+#           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # cek apakah ada perubahan file
-          if [[ -n "$(git status --porcelain)" ]]; then
-            echo "Changes detected, committing..."
+#           # cek apakah ada perubahan file
+#           if [[ -n "$(git status --porcelain)" ]]; then
+#             echo "Changes detected, committing..."
 
-            # add semua file JSON yang berubah
-            git add *.json
+#             # add semua file JSON yang berubah
+#             git add *.json
 
-            git commit -m "Auto update JSON data"
+#             git commit -m "Auto update JSON data"
 
-            # ambil commit terbaru dari remote lalu rebase commit kita di atasnya
-            git pull --rebase origin main
+#             # ambil commit terbaru dari remote lalu rebase commit kita di atasnya
+#             git pull --rebase origin main
 
-            # push ke branch main
-            git push origin HEAD:main
-          else
-            echo "No changes"
-          fi
+#             # push ke branch main
+#             git push origin HEAD:main
+#           else
+#             echo "No changes"
+#           fi
